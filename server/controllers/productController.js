@@ -1,11 +1,11 @@
-const { Catalog } = require('../models/index')
+const { Product } = require('../models/index')
 const FileService = require('../services/fileService')
 
-class CatalogController {
+class ProductController {
     async get(req, res){
         try{
-            const catalog = await Catalog.findAll() 
-            return res.status(200).json(catalog)
+            const product = await Product.findAll() 
+            return  res.status(200).json(product)
         } catch(e){
             return res.status(500).json({ 
                 message: `ошибка получения ${e}` 
@@ -17,17 +17,19 @@ class CatalogController {
         try{
             if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
 
-            const {name} = req.body
+            const {name, description, id_catalog} = req.body
             const img = FileService.getFile(req)
 
             const fileName = await FileService.saveFile(img)
             
-            const catalog = await Catalog.create({
+            const product = await Product.create({
                 name, 
+                description,
+                id_catalog,
                 img: fileName
             })
 
-            return res.json(catalog)
+            return res.json(product)
         } catch(e){
             return res.status(400).json({ 
                 message: e.message  
@@ -40,21 +42,23 @@ class CatalogController {
             if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
                 
             const {id} = req.params
-            const {name} = req.body
+            const {name, description, id_catalog} = req.body
             const img = FileService.getFile(req)
 
             if(!id) return res.status(400).json('не существует')
 
-            const catalog = await Catalog.findOne({where: { id_catalog: id }})
-            if(!catalog) return res.status(400).json('не существует')
-            
-            let fileName = catalog.img
+            const product = await Product.findOne({where: { id_product: id }})
+            if(!product) return res.status(400).json('не существует')
+
+            let fileName = product.img
             if (img) {
                 fileName = await FileService.saveFile(img)
             }
 
-            await catalog.update({
+            await product.update({
                 name: name,
+                description: description,
+                id_catalog: id_catalog,
                 img: fileName
             })
 
@@ -65,6 +69,24 @@ class CatalogController {
             })
         }
     }
+
+    async delete(req, res){
+        try{
+            const {id} = req.params
+            if(!id) return res.status(400).json('такого элемента не существует')
+
+            const product = await Product.findOne({ where: { id_product: id } });
+            if (!product) return res.status(400).json('такого элемента не существует')
+
+            await Product.destroy({ where:{ id_product: id } })
+
+            return res.json({ message: 'записть ' + id + ' удалена'})
+        } catch(e) {
+            return res.status(500).json({ 
+                message: `ошибка удаления ${e}`
+            })
+        }
+    }
 }
 
-module.exports = new CatalogController()
+module.exports = new ProductController()
