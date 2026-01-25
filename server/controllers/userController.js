@@ -8,7 +8,7 @@ class UserController {
             
         const hashedPassword = await hashPassword(password)
         const user = await User.create({ name, password: hashedPassword }) 
-        if (!user) return res.status(401).json({ message: 'ошибка создания пользователя' })
+        if (!user) return res.status(401).json({ message: 'ошибка создания' })
 
         const token = jwt.sign({ 
             id: user.id_user, 
@@ -34,7 +34,7 @@ class UserController {
             if(!user) return res.status(401).json({message: 'не найден'})
     
             const validPass = await comparePassword(password, user.password)
-            if(!validPass) return res.status(401).json({message: 'неверынй пароль'})
+            if(!validPass) return res.status(401).json({message: 'неверные данные'})
     
             const token = jwt.sign({ 
                 id: user.id_user, 
