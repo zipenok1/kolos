@@ -3,7 +3,7 @@ const fileFormat = require('../utils/fileFormat')
 const uuid = require("uuid")
 const path = require('path')
 
-class CatalogController{
+class CatalogController {
     async get(req, res){
         try{
             const catalog = await Catalog.findAll() 
@@ -17,6 +17,8 @@ class CatalogController{
 
     async post(req, res){
         try{
+            if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
+
             const {name} = req.body
             const {img} = req.files
 
@@ -39,6 +41,8 @@ class CatalogController{
 
     async put(req, res){
         try{
+            if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
+                
             const {id} = req.params
             const {name} = req.body
 
