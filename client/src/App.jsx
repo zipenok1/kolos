@@ -1,11 +1,22 @@
-import AppRouter from "./components/AppRouter"
+import { useContext } from 'react'
+import { Context } from './main'
+import { observer } from 'mobx-react-lite'
+import AppRouter from './components/AppRouter'
 
-export default function App () {
+const App = observer(() => {
+  const { user } = useContext(Context)
+
+  if (user.isLoading) {
+    return <Loader />
+  }
 
   return (
-      
     <div>
       <AppRouter/>
     </div>
   )
-}
+})
+
+export default App
+
+

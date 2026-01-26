@@ -2,4 +2,30 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Russo One";
+}
+
+h1{
+  font-size: 70px;
+}
+h2{
+  font-size: 50px;
+}
+h3{
+  font-size: 38px;
+}
+
+a{
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+
+button{
+  cursor: pointer;
+}
+
+.wraperAdmin{
+  max-width: 1920px;
+  width: 80%;
+  margin: 60px auto;
 }

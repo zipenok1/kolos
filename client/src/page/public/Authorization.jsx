@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import {observer} from 'mobx-react-lite'
 import { Context } from "../../main"
 import * as Api from '../../api' 
+import '../../styles/Authorization.css'
 
 const Authorization = observer(() => {
   const [name, setName] = useState('')
@@ -14,7 +15,8 @@ const Authorization = observer(() => {
   const submit = async (e) => {
     e.preventDefault()
     try {
-      await Api.auth.login({ name, password })
+      const data = await Api.auth.login({ name, password })
+      localStorage.setItem('token', data.token)
       user.setIsAuth(true)
       navigate('/admin')
     } catch (e) {
@@ -23,30 +25,30 @@ const Authorization = observer(() => {
   }
 
   return (
-    <div>
+    <div className="authorization">
         <form onSubmit={submit}>
-            <h3>Авторизация</h3>
-              <input 
-                type="text"
-                name="name"
-                placeholder="Введите имя"
-                value={name}
-                autoComplete="off"
-                onChange={(e)=>setName(e.target.value)}
-                required
-              />
-              <input 
-                type="password"
-                name="password"
-                placeholder="Введите пароль"
-                value={password}
-                autoComplete="off"
-                onChange={(e)=>setPassword(e.target.value)}
-                required
-              />
-              <button type="submit">
-                Войти
-              </button>  
+          <h3>Авторизация</h3>
+            <input 
+              type="text"
+              name="name"
+              placeholder="Введите имя"
+              value={name}
+              autoComplete="off"
+              onChange={(e)=>setName(e.target.value)}
+              required
+            />
+            <input 
+              type="password"
+              name="password"
+              placeholder="Введите пароль"
+              value={password}
+              autoComplete="off"
+              onChange={(e)=>setPassword(e.target.value)}
+              required
+            />
+            <button type="submit">
+              Войти
+            </button>  
         </form>         
     </div>
   )

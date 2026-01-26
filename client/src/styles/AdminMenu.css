@@ -1,0 +1,24 @@
+.adminMenu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.adminMenu div{
+    margin-top: 120px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+.adminMenu__card{
+    border: 1px solid black;
+    max-width: 400px;
+    text-align: center;
+    width: 100%;
+    padding: 40px 20px;
+}
+.adminMenu__card p{
+    margin-top: 10px;
+    font-size: 18px;
+}

@@ -1,0 +1,32 @@
+.authorization{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.authorization form{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: 400px;
+    width: 100%;
+}
+.authorization form input{
+    width: 100%;
+    outline: none;
+    margin-top: 12px;
+    border-radius: 8px;
+    border: 1px solid rgb(48, 48, 48);
+    padding: 10px;
+    font-size: 16px;
+}
+.authorization form button{
+    margin-top: 12px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: rgb(90, 204, 75);
+    color: #ffffff;
+    font-size: 18px;
+} 

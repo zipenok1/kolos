@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom"
-import { authRoutes, publicRoutes } from "../routers/index"
+import { authRoutes, publicRoutes } from "../routers/index.jsx"
 import { Context } from "../main"
 import { observer } from 'mobx-react-lite'
 
@@ -9,11 +9,11 @@ const AppRouter = observer(() => {
     
     return (
       <Routes>
-          {user.isAuth && authRoutes.map(({path, component}) =>
-            <Route key={path} path={path} Component={component} exact/>     
+          {user.isAuth && authRoutes.map(({path, element}) =>
+            <Route key={path} path={path} element={element}/>     
           )}
-           {publicRoutes.map(({path, component}) =>
-            <Route key={path} path={path} Component={component} exact/>
+           {publicRoutes.map(({path, element}) =>
+            <Route key={path} path={path} element={element}/>
           )}
           <Route path="*" element={<Navigate to="/" />} />
       </Routes>

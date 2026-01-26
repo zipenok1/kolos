@@ -1,7 +1,7 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom"
+import '../../styles/AdminMenu.css'
 
 export default function AdminMenu() {
-  const navigate = useNavigate()
 
   const navigation = [
     {
@@ -32,6 +32,16 @@ export default function AdminMenu() {
   ]
 
   return (
-    <div>AdminMenu</div>
+    <div className="adminMenu">
+      <h2>Меню навигации</h2>
+      <div>
+        {navigation.map((el, index) => (
+          <Link className="adminMenu__card" to={el.path} key={index} >
+            <h3>{el.label}</h3>
+            <p>{el.description}</p>
+          </Link>
+        ))}
+      </div>
+    </div>
   )
 }
