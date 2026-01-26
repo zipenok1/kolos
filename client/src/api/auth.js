@@ -4,9 +4,9 @@ const api = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
 })
 
-export const register = async (values) => {
-    return (await api.post('user/registr', values)).data
-}
+// export const register = async (values) => {
+//     return (await api.post('user/registr', values)).data
+// }
 
 export const login = async (values) => {
     return (await api.post('user/login', values)).data
