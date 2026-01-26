@@ -1,10 +1,18 @@
-import { StrictMode } from 'react'
+import { createContext } from 'react'
+import { BrowserRouter } from 'react-router-dom'
 import { createRoot } from 'react-dom/client'
-import './index.css'
+import UserStore from './store/UserStore'
 import App from './App.jsx'
+import './index.css'
+
+export const Context = createContext(null)
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+  <Context.Provider value={{
+    user: new UserStore
+  }}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Context.Provider>
 )
