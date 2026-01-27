@@ -5,6 +5,10 @@
   font-family: "Russo One";
 }
 
+body{
+  background-color: rgba(245, 245, 245, 1);
+}
+
 h1{
   font-size: 70px;
 }
@@ -22,10 +26,82 @@ a{
 
 button{
   cursor: pointer;
+  border: none;
 }
 
 .wraperAdmin{
   max-width: 1920px;
-  width: 80%;
+  width: 88%;
   margin: 60px auto;
+}
+
+.adminCatalog__content{
+  margin-top: 40px;
+  display: flex;
+  gap: 38px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.adminCatalog__card{
+  flex: 1;
+  border-radius: 20px;
+  height: 350px;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+.adminCatalog__card div{
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+.adminCatalog__card div p {
+  font-size: 20px;
+}
+.adminCatalog-post{
+  margin-top: 40px;
+  background-color: rgb(90, 204, 75);
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 8px;
+}
+.adminCatalog__card div button{
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 8px;
+  background-color: rgb(201, 201, 201);
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal__content {
+  margin: 0 auto;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 420px;
+  position: relative;
+}
+.modal__close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #ce322d;
 }
