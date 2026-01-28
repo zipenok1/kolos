@@ -1,8 +1,8 @@
 import { createPortal } from 'react-dom';
 
-export default function AdminModal({ isOpen, onClose, children}) {  
+export default function AdminModal({ isOpen, onClose, children }) {  
 
-  if (!isOpen.isModal) return null
+  if (!isOpen) return null
 
   return createPortal(
     <div className='modal'>

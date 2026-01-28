@@ -65,6 +65,24 @@ class CatalogController {
             })
         }
     }
+
+    async delete(req, res){
+        try{
+            if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
+            const {id} = req.params 
+
+            const catalog = await Catalog.findOne({ where: { id_catalog: id } })
+            if(!catalog) return res.status(400).json('такого элемента не существует')
+
+            await Catalog.destroy({ where:{ id_catalog: id } })
+
+            return res.json({ message: 'записть ' + id + ' удалена'})
+        } catch(e){
+            return res.status(500).json({ 
+                message: `ошибка удалена ${e}`
+            })
+        }
+    }
 }
 
 module.exports = new CatalogController()

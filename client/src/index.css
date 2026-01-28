@@ -52,12 +52,16 @@ button{
   flex-direction: column;
   justify-content: end;
 }
-.adminCatalog__card div{
+.adminCatalog__card-content{
   background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
+}
+.adminCatalog__card-content div{
+  display: flex;
+  gap: 10px;
 }
 .adminCatalog__card div p {
   font-size: 20px;
@@ -65,13 +69,14 @@ button{
 .adminCatalog-post{
   margin-top: 40px;
   background-color: rgb(90, 204, 75);
+  color: #fff;
   padding: 10px 20px;
   font-size: 18px;
   border-radius: 8px;
 }
 .adminCatalog__card div button{
-  padding: 10px;
-  font-size: 18px;
+  padding: 8px;
+  font-size: 16px;
   border-radius: 8px;
   background-color: rgb(201, 201, 201);
 }

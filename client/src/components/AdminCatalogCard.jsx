@@ -3,15 +3,12 @@ import AdminModal from './AdminModal';
 import * as Api from '../api/index'
 
 export default function AdminCatalogCard({el, get}) {
-    const [isOpen, setIsOpen] = useState({ isModal: false, isApi: true })
+    const [isOpen, setIsOpen] = useState(false)
+    const [isApi, setIsApi] = useState(false)
     const [formValue, setFormValue] = useState({ 
         name: el.name || '',
         img: el.img || ''
     })
-
-    const update = () => {
-        setIsOpen({ isModal: true, isApi: true });
-    }  
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
@@ -23,38 +20,41 @@ export default function AdminCatalogCard({el, get}) {
         }
     }
 
-    const putCatalog = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault()
         try {
-            const data = new FormData()
-            data.append('name', formValue.name)
-            if (formValue.img instanceof File) {
-                data.append('img', formValue.img)
+            if(isApi){
+                const data = new FormData()
+                data.append('name', formValue.name)
+                if (formValue.img instanceof File) {
+                    data.append('img', formValue.img)
+                }
+                await Api.catalog.putCatalog(el.id_catalog, data)
+                console.log('данные успешно обновлены')
+            } else {
+                await Api.catalog.deleteCatalog(el.id_catalog)
+                console.log('данные успешно удалены')
             }
-            await Api.catalog.putCatalog(el.id_catalog, data)
-            setIsOpen({ ...isOpen, isModal: false })
+            setIsOpen(false)
             get()
-            console.log('данные успешно обновлены')
         } catch(e) {
             console.log('ошибка: ' + (e.message))
         }
     }
-    
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        putCatalog();
-    }
 
     return (
     <div className='adminCatalog__card' style={{backgroundImage: `url(${import.meta.env.VITE_IMG_URL}${el.img})`}}>
-        <div>
+        <div className='adminCatalog__card-content'>
             <p>{el.name}</p>
-            <button onClick={update}>Обновить</button>
+            <div>
+                <button onClick={() => setIsOpen(true)}>Открыть</button>
+            </div> 
         </div>
         <AdminModal
          isOpen={isOpen} 
-         onClose={() => setIsOpen({...isOpen, isModal: false})}
+         onClose={() => setIsOpen(false)}
         >
-            <h3>{isOpen.isApi ? 'редактировать' : 'удалить'}</h3>
+            <h3>Управление</h3>
             <form onSubmit={handleSubmit}>
                 <input 
                     type="text" 
@@ -73,15 +73,11 @@ export default function AdminCatalogCard({el, get}) {
                 />
 
                 <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
-                    <button type="submit">
-                        Сохранить изменения
+                    <button type="submit" onClick={() => setIsApi(true)}>
+                        Обновить
                     </button>
-                    <button 
-                        type="button"
-                        onClick={() => setIsOpen({...isOpen, isModal: false})}
-                        style={{ background: '#ccc' }}
-                    >
-                        Отмена
+                    <button type="submit" onClick={() => setIsApi(false)} style={{ background: '#ff4444' }}>
+                        Удалить
                     </button>
                 </div>
             </form>

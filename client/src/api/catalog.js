@@ -17,7 +17,11 @@ export const getCatalog = async () => {
 }
 
 export const postCatalog = async (values) => {
-  return (await api.post('catalog/', values)).data
+  return (await api.post('catalog/', values, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })).data
 }
 
 export const putCatalog = async (id, values) => {
@@ -26,4 +30,8 @@ export const putCatalog = async (id, values) => {
       'Content-Type': 'multipart/form-data'
     }
   })).data
+}
+
+export const deleteCatalog = async (id) => {
+  return (await api.delete(`catalog/${id}`)).data
 }
