@@ -35,14 +35,20 @@ button{
   margin: 60px auto;
 }
 
-.adminCatalog__content{
+.adminContent h2{
+  margin-top: 20px;
+}
+.adminContent a{
+  font-size: 18px;
+}
+.adminContent__content{
   margin-top: 40px;
   display: flex;
   gap: 38px;
   justify-content: center;
   flex-wrap: wrap;
 }
-.adminCatalog__card{
+.adminContent__card{
   flex: 1;
   border-radius: 20px;
   height: 350px;
@@ -52,21 +58,21 @@ button{
   flex-direction: column;
   justify-content: end;
 }
-.adminCatalog__card-content{
+.adminContent__card-content{
   background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
 }
-.adminCatalog__card-content div{
+.adminContent__card-content div{
   display: flex;
   gap: 10px;
 }
-.adminCatalog__card div p {
+.adminContent__card div p {
   font-size: 20px;
 }
-.adminCatalog-post{
+.adminContent-post{
   margin-top: 40px;
   background-color: rgb(90, 204, 75);
   color: #fff;
@@ -74,7 +80,7 @@ button{
   font-size: 18px;
   border-radius: 8px;
 }
-.adminCatalog__card div button{
+.adminContent__card div button{
   padding: 8px;
   font-size: 16px;
   border-radius: 8px;

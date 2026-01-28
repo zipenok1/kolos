@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import AdminModal from './AdminModal';
+import AdminModal from './AdminModal'
 import * as Api from '../api/index'
 
 export default function AdminCatalogCard({el, get}) {
@@ -11,7 +11,7 @@ export default function AdminCatalogCard({el, get}) {
     })
 
     const handleFileChange = (e) => {
-        const file = e.target.files[0];
+        const file = e.target.files[0]
         if (file) {
             setFormValue(prev => ({
                 ...prev,
@@ -30,21 +30,20 @@ export default function AdminCatalogCard({el, get}) {
                     data.append('img', formValue.img)
                 }
                 await Api.catalog.putCatalog(el.id_catalog, data)
-                console.log('данные успешно обновлены')
             } else {
                 await Api.catalog.deleteCatalog(el.id_catalog)
-                console.log('данные успешно удалены')
             }
             setIsOpen(false)
             get()
         } catch(e) {
             console.log('ошибка: ' + (e.message))
+            setIsOpen(false)
         }
     }
 
     return (
-    <div className='adminCatalog__card' style={{backgroundImage: `url(${import.meta.env.VITE_IMG_URL}${el.img})`}}>
-        <div className='adminCatalog__card-content'>
+    <div className='adminContent__card' style={{backgroundImage: `url(${import.meta.env.VITE_IMG_URL}${el.img})`}}>
+        <div className='adminContent__card-content'>
             <p>{el.name}</p>
             <div>
                 <button onClick={() => setIsOpen(true)}>Открыть</button>
