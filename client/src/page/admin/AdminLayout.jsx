@@ -1,3 +1,5 @@
+import '../../styles/AdminContent.css'
+
 export default function AdminLayout({children}) {
   return (
     <div className='wraperAdmin'>

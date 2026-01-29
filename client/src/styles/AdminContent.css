@@ -1,0 +1,138 @@
+.wraperAdmin{
+  max-width: 1920px;
+  width: 88%;
+  margin: 40px auto;
+}
+
+.adminContent h2{
+  margin-top: 20px;
+}
+
+.adminContent a{
+  font-size: 18px;
+}
+
+.adminContent__content{
+  margin-top: 40px;
+  display: flex;
+  gap: 38px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.adminContent__card{
+  border-radius: 12px;
+  padding: 0;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  flex: 1 0 400px; 
+}
+.adminContent__card-img{
+  border-radius: 12px 12px 0 0;
+  height: 350px;
+  background-position: center;
+  background-size: cover;
+}
+
+.adminContent__card-content{
+  background-color: #fff;
+  padding: 15px 20px;
+  border-top: 1px solid #eee;
+}
+
+.adminContent__card div p {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.adminContent-post{
+  margin-top: 40px;
+  background-color: rgb(90, 204, 75);
+  color: #fff;
+  padding: 12px 24px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: none;
+}
+
+.adminContent__card div button{
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  background-color: rgb(90, 204, 75);
+  color: white;
+  border: none;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal__content {
+  margin: 0 auto;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 420px;
+  position: relative;
+}
+
+.modal__close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #ce322d;
+}
+
+.modal__content form{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal__content form input{
+  width: 100%;
+  outline: none;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 12px;
+  font-size: 16px;
+}
+
+.modal__content form button{
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: rgb(90, 204, 75);
+  color: #ffffff;
+  font-size: 18px;
+  border: none;
+}
+
+.modal__content .modal__button{
+  display: flex; 
+  gap: 10px; 
+}
+
+.modal__content .modal__button-del{
+  background-color: #ce322d;
+}

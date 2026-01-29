@@ -48,16 +48,13 @@ export default function AdminCard({
     }
 
     return (
-       <div className='adminContent__card' style={{
-           backgroundImage: el.img ? `url(${envImgUrl}${el.img})` : 'none'
-       }}>
+        <div className='adminContent__card'>
+            {el.img ? <div className='adminContent__card-img' style={{backgroundImage: `url(${envImgUrl}${el.img})`}}></div> : null}
             <div className='adminContent__card-content'>
                 {renderContent(el)}
-                <div>
-                    <button onClick={() => setIsOpen(true)}>
-                        Управление
-                    </button>
-                </div> 
+                <button onClick={() => setIsOpen(true)}>
+                    Управление
+                </button>
             </div>
             
             <AdminModal isOpen={isOpen} onClose={handleModalClose}>
@@ -86,7 +83,7 @@ export default function AdminCard({
                             )
                         ))}
 
-                        <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+                        <div className='modal__button'>
                             {api.update ?    
                                 <button type="submit">
                                     Сохранить
@@ -95,7 +92,7 @@ export default function AdminCard({
                             <button 
                                 type="button"
                                 onClick={() => setAction('delete')}
-                                style={{ background: '#ff4444' }}
+                                className='modal__button-del'
                             >
                                 Удалить
                             </button>
