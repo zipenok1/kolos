@@ -7,7 +7,7 @@ const App = observer(() => {
   const { user } = useContext(Context)
 
   if (user.isLoading) {
-    return <Loader />
+    return <> загрузка... </>
   }
 
   return (

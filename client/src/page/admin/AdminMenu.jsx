@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import '../../styles/AdminMenu.css'
+import '../../styles/adminMenu.css'
 
 export default function AdminMenu() {
 

@@ -101,15 +101,16 @@ export default function AdminCard({
                 ) : (
                     <div>
                         <p>Вы уверены, что хотите удалить этот элемент?</p>
-                        <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+                        <div className='modal__button'>
                             <button 
                                 type="button"
                                 onClick={handleSubmit}
-                                style={{ background: '#ff4444' }}
+                                className='modal__button-del'
                             >
                                 Да, удалить
                             </button>
                             <button 
+                                className='modal__button-cancel'
                                 type="button"
                                 onClick={() => setAction('update')}
                             >

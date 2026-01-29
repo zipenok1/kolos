@@ -132,7 +132,17 @@
   display: flex; 
   gap: 10px; 
 }
-
+.modal__content .modal__button button{
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 18px;
+}
 .modal__content .modal__button-del{
   background-color: #ce322d;
+}
+.modal__content .modal__button-cancel{
+  background-color: #a3a3a3;
 }

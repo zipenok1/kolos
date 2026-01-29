@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import {observer} from 'mobx-react-lite'
 import { Context } from "../../main"
 import * as Api from '../../api' 
-import '../../styles/Authorization.css'
+import '../../styles/authorization.css'
 
 const Authorization = observer(() => {
   const [name, setName] = useState('')

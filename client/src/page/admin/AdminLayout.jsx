@@ -1,4 +1,4 @@
-import '../../styles/AdminContent.css'
+import '../../styles/adminContent.css'
 
 export default function AdminLayout({children}) {
   return (
