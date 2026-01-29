@@ -12,11 +12,11 @@ api.interceptors.request.use((config) => {
   return config
 })
 
-export const getCatalog = async () => {
+export const get = async () => {
   return (await api.get('catalog/')).data
 }
 
-export const postCatalog = async (values) => {
+export const post = async (values) => {
   return (await api.post('catalog/', values, {
     headers: {
       'Content-Type': 'multipart/form-data'
@@ -24,7 +24,7 @@ export const postCatalog = async (values) => {
   })).data
 }
 
-export const putCatalog = async (id, values) => {
+export const put = async (id, values) => {
   return (await api.put(`catalog/${id}`, values, {
     headers: {
       'Content-Type': 'multipart/form-data'
@@ -32,6 +32,6 @@ export const putCatalog = async (id, values) => {
   })).data
 }
 
-export const deleteCatalog = async (id) => {
+export const delet = async (id) => {
   return (await api.delete(`catalog/${id}`)).data
 }

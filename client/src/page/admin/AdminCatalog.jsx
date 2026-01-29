@@ -1,19 +1,22 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as Api from '../../api/index'
-import AdminCatalogCard from '../../components/AdminCatalogCard' 
 import AdminModal from '../../components/AdminModal'
+import AdminCatalogCard from '../../components/AdminCatalogCard' 
+import { useSimpleForm } from "../../hooks/useSimpleForm"
+import { createFormData } from "../../utils/formHelpers"
 
 export default function adminContent() {
   const [catalog, setCatalog] = useState([])
   const [isOpen, setIsOpen] = useState(false)
-  const [formValue, setFormValue] = useState({ 
+
+  const { formValue, handleChange, resetForm } = useSimpleForm({
     name: '',
     img: ''
   })
 
   const getCatalog = async () => {
-    const data = await Api.catalog.getCatalog()
+    const data = await Api.catalog.get()
     setCatalog(data)
   }
   
@@ -21,31 +24,22 @@ export default function adminContent() {
     getCatalog()
   }, [])
 
-  const handleFileChange = (e) => {
-      const file = e.target.files[0]
-      if (file) {
-          setFormValue(prev => ({
-              ...prev,
-              img: file
-          }))
-      }
-  }  
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     try{
-      const data = new FormData()
-      data.append('name', formValue.name)
-      if (formValue.img instanceof File) {
-        data.append('img', formValue.img)
-      }
-      await Api.catalog.postCatalog(data)
+      const data = createFormData(formValue)
+      await Api.catalog.post(data)
       setIsOpen(false)
       getCatalog()
     } catch(e) {
       console.log('ошибка: ' + (e.message))
       setIsOpen(false)
     }
+  }
+
+  const handleModalClose = () => {
+    setIsOpen(false)
+    resetForm()
   }
 
   return (
@@ -62,12 +56,12 @@ export default function adminContent() {
       </button>
       <div className='adminContent__content'>
         {catalog.map(el => (
-          <AdminCatalogCard el={el} key={el.id_catalog} get={getCatalog}/>
+          <AdminCatalogCard key={el.id_catalog}  el={el} get={getCatalog}/>
         ))}
       </div>
       <AdminModal
         isOpen={isOpen} 
-        onClose={() => setIsOpen(false)}
+        onClose={handleModalClose}
       >
         <h3>Добавление</h3>
           <form onSubmit={handleSubmit}>
@@ -76,15 +70,12 @@ export default function adminContent() {
               name='name'
               placeholder="заголовок"
               value={formValue.name}
-              onChange={(e) => setFormValue(prev => ({
-                  ...prev,
-                  [e.target.name]: e.target.value
-              }))}
+              onChange={handleChange}
             />
             <input 
               type="file"
               name='img' 
-              onChange={handleFileChange}
+              onChange={handleChange}
             />
             <button type="submit">
                 Добавить

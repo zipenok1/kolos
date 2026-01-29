@@ -12,11 +12,11 @@ api.interceptors.request.use((config) => {
   return config
 })
 
-export const getNews = async () => {
+export const get = async () => {
   return (await api.get('news/')).data
 }
 
-export const postNews = async (values) => {
+export const post = async (values) => {
   return (await api.post('news/', values, {
     headers: {
       'Content-Type': 'multipart/form-data'
@@ -24,7 +24,7 @@ export const postNews = async (values) => {
   })).data
 }
 
-export const putNews = async (id, values) => {
+export const put = async (id, values) => {
   return (await api.put(`news/${id}`, values, {
     headers: {
       'Content-Type': 'multipart/form-data'
@@ -32,6 +32,6 @@ export const putNews = async (id, values) => {
   })).data
 }
 
-export const deleteNews = async (id) => {
+export const delet = async (id) => {
   return (await api.delete(`news/${id}`)).data
 }

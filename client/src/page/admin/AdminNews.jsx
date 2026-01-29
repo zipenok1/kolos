@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom'
 import * as Api from '../../api/index'
 import AdminModal from '../../components/AdminModal'
 import AdminNewsCard from "../../components/AdminNewsCard"
+import { useSimpleForm } from "../../hooks/useSimpleForm"
+import { createFormData } from "../../utils/formHelpers"
 
 export default function AdminNews() {
   const [news, setNews] = useState([])
   const [isOpen, setIsOpen] = useState(false)
-  const [formValue, setFormValue] = useState({ 
+
+  const { formValue, handleChange, resetForm } = useSimpleForm({
     name: '',
     description: '',
     date: '',
@@ -15,7 +18,7 @@ export default function AdminNews() {
   })
   
   const getNews = async () => {
-    const data = await Api.news.getNews()
+    const data = await Api.news.get()
     setNews(data)
   }
   
@@ -23,33 +26,22 @@ export default function AdminNews() {
     getNews()
   }, [])
 
-  const handleFileChange = (e) => {
-      const file = e.target.files[0]
-      if (file) {
-          setFormValue(prev => ({
-              ...prev,
-              img: file
-          }))
-      }
-  }  
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     try{
-      const data = new FormData()
-      data.append('name', formValue.name)
-      data.append('description', formValue.description)
-      data.append('date', formValue.date)
-      if (formValue.img instanceof File) {
-        data.append('img', formValue.img)
-      }
-      await Api.news.postNews(data)
+      const data = createFormData(formValue)
+      await Api.news.post(data)
       setIsOpen(false)
       getNews()
     } catch(e) {
       console.log('ошибка: ' + (e.message))
       setIsOpen(false)
     }
+  }
+
+  const handleModalClose = () => {
+    setIsOpen(false)
+    resetForm()
   }
 
   return (
@@ -66,12 +58,12 @@ export default function AdminNews() {
       </button>
       <div className='adminContent__content'>
         {news.map(el => (
-          <AdminNewsCard el={el} key={el.id_news} get={getNews}/>
+          <AdminNewsCard key={el.id_news} el={el} get={getNews}/>
         ))}
       </div>
-      <AdminModal
+<AdminModal
         isOpen={isOpen} 
-        onClose={() => setIsOpen(false)}
+        onClose={handleModalClose}
       >
         <h3>Добавление</h3>
           <form onSubmit={handleSubmit}>
@@ -80,41 +72,31 @@ export default function AdminNews() {
               name='name'
               placeholder="заголовок"
               value={formValue.name}
-              onChange={(e) => setFormValue(prev => ({
-                  ...prev,
-                  [e.target.name]: e.target.value
-              }))}
+              onChange={handleChange}
             />
             <input 
               type="text" 
               name='description'
               placeholder="описание"
               value={formValue.description}
-              onChange={(e) => setFormValue(prev => ({
-                  ...prev,
-                  [e.target.name]: e.target.value
-              }))}
+              onChange={handleChange}
             />
             <input 
               type="date" 
               name='date'
-              placeholder="описание"
               value={formValue.date}
-              onChange={(e) => setFormValue(prev => ({
-                  ...prev,
-                  [e.target.name]: e.target.value
-              }))}
+              onChange={handleChange}
             />
             <input 
               type="file"
               name='img' 
-              onChange={handleFileChange}
+              onChange={handleChange}
             />
             <button type="submit">
                 Добавить
             </button>
           </form>    
-      </AdminModal>      
+      </AdminModal>   
     </div>
   )
 }

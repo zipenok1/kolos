@@ -1,16 +1,16 @@
 import * as Api from '../api/index'
 import AdminCard from './AdminCard'
 
-export default function AdminNewsCard({ el, get }) {
+export default function AdminProductCard({ el, get }) {
     const newsApi = {
-        update: (id, data) => Api.news.put(id, data),
-        delete: (id) => Api.news.delet(id)
+        update: (id, data) => Api.product.put(id, data),
+        delete: (id) => Api.product.delet(id)
     }
 
     const newsFields = [
         { name: 'name', label: 'Название', placeholder: 'Заголовок' },
         { name: 'description', label: 'Описание', placeholder: 'Описание' },
-        { name: 'date', label: 'Дата', type: 'date' },
+        { name: 'id_catalog', label: 'Каталог', type: 'number' },
         { name: 'img', label: 'Изображение', type: 'file', accept: 'image/*' }
     ]
 
@@ -18,7 +18,7 @@ export default function AdminNewsCard({ el, get }) {
         <>
             <p>{item.name}</p>
             <p>{item.description}</p>
-            <p>{new Date(item.date).toLocaleDateString('ru-RU')}</p>
+            <p>{item.id_catalog}</p>
         </>
     )
 
@@ -28,7 +28,7 @@ export default function AdminNewsCard({ el, get }) {
             get={get}
             fields={newsFields}
             api={newsApi}
-            id={el.id_news}
+            id={el.id_product}
             renderContent={renderContent}
             envImgUrl={import.meta.env.VITE_IMG_URL}
         />
