@@ -87,9 +87,11 @@ export default function AdminCard({
                         ))}
 
                         <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
-                            <button type="submit">
-                                Сохранить
-                            </button>
+                            {api.update ?    
+                                <button type="submit">
+                                    Сохранить
+                                </button> : null
+                            }
                             <button 
                                 type="button"
                                 onClick={() => setAction('delete')}

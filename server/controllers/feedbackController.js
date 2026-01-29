@@ -29,8 +29,9 @@ class FeedbackController {
 
     async delete(req, res){
         try{
-            if(!id) return res.status(400).json('такого элемента не существует')
             const {id} = req.params
+            if(!id) return res.status(400).json('такого элемента не существует')
+          
 
             const feedback = await Feedback.findOne({ where: { id_feedback: id } });
             if (!feedback) return res.status(400).json('такого элемента не существует')

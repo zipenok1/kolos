@@ -61,7 +61,7 @@ export default function AdminNews() {
           <AdminNewsCard key={el.id_news} el={el} get={getNews}/>
         ))}
       </div>
-<AdminModal
+      <AdminModal
         isOpen={isOpen} 
         onClose={handleModalClose}
       >
