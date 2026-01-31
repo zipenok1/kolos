@@ -1,0 +1,21 @@
+.header{
+    padding: 24px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header__content{
+    display: flex;
+    gap: 100px;
+}
+.header__content a{
+    font-size: 18px;
+}
+
+.header button{
+    border: 1px solid black;
+    background: none;
+    padding: 14px 30px;
+    font-size: 16px;
+    border-radius: 50px;
+}

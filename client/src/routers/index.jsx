@@ -11,7 +11,7 @@ import AdminProduct from '../page/admin/AdminProduct'
 import AdminFeedback from '../page/admin/AdminFeedback'
 import AdminNews from '../page/admin/AdminNews'
 import AdminNewsletter from '../page/admin/AdminNewsletter'
-import AdminLayout from '../page/admin/AdminLayout'
+import AdminLayout from '../components/AdminLayout'
 
 export const publicRoutes = [
     { path: '/auth', element: <Authorization /> },

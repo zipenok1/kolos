@@ -2,7 +2,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Russo One";
+  font-family: "Manrope";
 }
 
 body{
@@ -10,15 +10,23 @@ body{
 }
 
 h1{
-  font-size: 70px;
+  font-size: 60px;
+  font-weight: 500;
+  font-family: "Russo One";
 }
 h2{
-  font-size: 50px;
+  font-size: 40px;
+  font-weight: 500;
+  font-family: "Russo One";
 }
 h3{
-  font-size: 38px;
+  font-size: 28px;
+  font-weight: 500;
+  font-family: "Russo One";
 }
-
+li{
+  list-style: none;
+}
 a{
   text-decoration: none;
   color: rgb(0, 0, 0);
@@ -29,3 +37,8 @@ button{
   border: none;
 }
 
+.wraperPublic{
+  max-width: 1920px;
+  width: 90%;
+  margin: 0 auto;
+}
