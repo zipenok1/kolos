@@ -31,8 +31,6 @@ export default function Home() {
     message: ''
   })
 
-  const envImgUrl = import.meta.env.VITE_IMG_URL
-
   const newsletterSubmit = async (e) => {
     e.preventDefault()
     try {
