@@ -22,7 +22,7 @@
     color: rgb(122, 122, 122);
 }
 .tab-button.active {
-  color: rgba(0, 0, 0, 1);
+    color: rgba(0, 0, 0, 1);
 }
 
 .swiper-container {
@@ -55,7 +55,7 @@
     flex-direction: column;
 }
 .slide-text p {
-    margin: 12px auto 0;
+    margin: 10px auto 0;
     font-size: 20px;
     max-width: 630px;
     color: #686868;
