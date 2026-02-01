@@ -69,3 +69,49 @@
         max-width: 320px;
     }
 }
+
+.about{
+    background: rgba(32, 29, 27, 1);
+    padding: 120px 0;
+}
+.about__content{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+.about-card{
+    position: relative;
+    flex: 1 0 600px; 
+    padding: 40px;
+    border: 1px solid rgba(255, 255, 255, 1);   
+    border-radius: 20px;
+    color: rgba(255, 255, 255, 1);
+}
+.about-card p{
+    margin-top: 24px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 24px;
+}
+.about-card span{
+    position: absolute;
+    bottom: 14px;
+    right: 14px;
+    font-weight: 500;
+    font-family: "Russo One";
+    text-transform: uppercase;
+    font-size: 50px;
+    color: rgba(255, 255, 255, 0.09);
+}
+
+@media(max-width: 700px){
+    .about-card{
+        padding: 20px;
+        flex: 1 ; 
+    }
+    .about-card span{
+        bottom: 10px;
+        right: 10px;
+        font-size: 30px;
+    }
+}
