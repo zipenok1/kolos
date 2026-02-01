@@ -150,6 +150,40 @@
     width: 100%;
 }
 
+.news{
+    padding: 60px 0;
+}
+.news_content > p{
+    margin-top: 24px;
+    font-size: 22px;
+    max-width: 1600px;
+    width: 100%;
+}
+.news_cards{
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+.news-cards-el{
+    flex: 1 0 280px;
+    display: flex;
+    flex-direction: column;
+}
+.news-cards-el img{
+    max-height: 350px;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+.news-cards-el div{
+    padding: 30px 15px;
+}
+.news-cards-el div p{
+    margin-top: 10px;
+    font-size: 18px;
+}
+
 @media(max-width: 1325px){
     .hero {
         justify-content: space-between;
@@ -174,6 +208,9 @@
     }
     .chips__container-desc{
         font-size: 22px;
+    }
+    .news_content > p{
+        font-size: 18px;
     }
 }
 @media(max-width: 1050px){
@@ -200,6 +237,9 @@
         bottom: 10px;
         right: 10px;
         font-size: 30px;
+    }
+    .news-cards-el div p{
+        font-size: 16px;
     }
 }
 @media(max-width: 490px){

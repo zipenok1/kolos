@@ -1,15 +1,19 @@
+import { useEffect, useState } from 'react'
+import { useSimpleForm } from '../../hooks/useSimpleForm'
+import { createFormData } from '../../utils/formHelpers'
 import Header from '../../components/Header'
 import PublicLayout from '../../components/PublicLayout'
 import Slider from '../../components/Slider'
 import * as Api from '../../api/index'
-import { useSimpleForm } from '../../hooks/useSimpleForm'
-import { createFormData } from '../../utils/formHelpers'
 import '../../styles/home.css'
 
 export default function Home() {
+  const [news, setNews] = useState([])
   const { formValue, handleChange, resetForm } = useSimpleForm({
     email: ''
   })
+
+  const envImgUrl = import.meta.env.VITE_IMG_URL
 
   const newsletterSubmit = async (e) => {
     e.preventDefault()
@@ -21,6 +25,13 @@ export default function Home() {
       console.log('ошибка: ' + (e.message))
     }
   }  
+
+  useEffect(() => {
+    (async () => {
+      const data = await Api.news.get()
+      setNews(data)
+    })()
+  }, [])
 
   return (
     <div>
@@ -118,8 +129,32 @@ export default function Home() {
             </div>
           </PublicLayout>
         </section>
-
-        
+        <section className='news'>
+          <PublicLayout>
+            <div className='news_content'>
+              <h2>Новости</h2>
+              <p>
+                Навесная конструкция бороны позволяет легко и быстро подключать 
+                её к трактору, что делает процесс обработки полей более 
+                удобным и эффективным. Благодаря своей маневренности и компактным размерам, 
+                дисковая борона может использоваться на участках с ограниченным 
+                пространством, а также в условиях сложного рельефа.
+              </p>
+              <div className='news_cards'>
+                {news.slice(0, 3).map((el) => ( 
+                  <div key={el.id} className='news-cards-el'>
+                    <img src={`${envImgUrl}/${el.img}`} alt={el.name} />
+                    <div>
+                      <h3>{el.name}</h3>
+                      <p>{el.description}</p>
+                      <p>{new Date(el.date).toLocaleDateString('ru-RU')}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </PublicLayout>
+        </section>
 
       </main>
     </div>
