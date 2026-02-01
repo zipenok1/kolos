@@ -1,0 +1,14 @@
+.footer{
+    padding: 60px 0;
+    background: rgba(32, 29, 27, 1);
+}
+.foonter__content ul{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 60px;
+}
+.foonter__content a{
+    color: #fff;
+    font-size: 22px;
+}
