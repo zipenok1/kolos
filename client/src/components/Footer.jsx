@@ -9,9 +9,9 @@ export default function Footer() {
                 <div className='foonter__content'>
                     <nav>
                         <ul>
-                            <li><Link>Главная</Link></li>
-                            <li><Link>Каталог</Link></li>
-                            <li><Link>Новости</Link></li>
+                            <li><Link to={'/'}>Главная</Link></li>
+                            <li><Link to={'/catalog'}>Каталог</Link></li>
+                            <li><Link to={'/news'}>Новости</Link></li>
                         </ul>
                     </nav>
                 </div>

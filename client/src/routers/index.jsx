@@ -14,12 +14,12 @@ import AdminNewsletter from '../page/admin/AdminNewsletter'
 import AdminLayout from '../components/AdminLayout'
 
 export const publicRoutes = [
-    { path: '/auth', element: <Authorization /> },
-    { path: '/', element: <Home /> },
-    { path: '/catalog', element: <Catalog /> },
-    { path: '/product', element: <Product /> },
-    { path: '/news', element: <News /> },
-    { path: '/news/:id', element: <NewsDetailed /> }
+  { path: '/auth', element: <Authorization /> },
+  { path: '/', element: <Home /> },
+  { path: '/catalog', element: <Catalog /> },
+  { path: '/product', element: <Product /> },
+  { path: '/news', element: <News /> },
+  { path: '/news/:id', element: <NewsDetailed /> }
 ]
 
 const withAdminLayout = (Component) => (
@@ -29,10 +29,10 @@ const withAdminLayout = (Component) => (
 )
 
 export const authRoutes = [
-    { path: '/admin', element: withAdminLayout(AdminMenu) },
-    { path: '/admin/catalog', element: withAdminLayout(AdminCatalog) },
-    { path: '/admin/product', element: withAdminLayout(AdminProduct) },
-    { path: '/admin/feedback', element: withAdminLayout(AdminFeedback) },
-    { path: '/admin/news', element: withAdminLayout(AdminNews) },
-    { path: '/admin/newsletter', element: withAdminLayout(AdminNewsletter) }
+  { path: '/admin', element: withAdminLayout(AdminMenu) },
+  { path: '/admin/catalog', element: withAdminLayout(AdminCatalog) },
+  { path: '/admin/product', element: withAdminLayout(AdminProduct) },
+  { path: '/admin/feedback', element: withAdminLayout(AdminFeedback) },
+  { path: '/admin/news', element: withAdminLayout(AdminNews) },
+  { path: '/admin/newsletter', element: withAdminLayout(AdminNewsletter) }
 ];

@@ -4,6 +4,7 @@ import { createFormData } from '../../utils/formHelpers'
 import Header from '../../components/Header'
 import Slider from '../../components/Slider'
 import PublicLayout from '../../components/PublicLayout'
+import NewsCard from '../../components/NewsCard'
 import Footer from '../../components/Footer'
 import * as Api from '../../api/index'
 import '../../styles/home.css'
@@ -37,7 +38,6 @@ export default function Home() {
     try {
       const data = createFormData(newsletterForm)
       await Api.newsletter.post(data)
-      console.log(data, 'успех');
       resetNewsletterForm()
     } catch(e) {
       console.log('ошибка: ' + (e.message))
@@ -49,7 +49,6 @@ export default function Home() {
     try {
       const data = createFormData(feedbackForm)
       await Api.feedback.post(data)
-      console.log(data, 'успех');
       resetFeedbackForm()
     } catch(e) {
       console.log('ошибка: ' + (e.message))
@@ -88,23 +87,32 @@ export default function Home() {
           <PublicLayout>
             <div className='about__content'>
               <div className='about-card'>
-                <h3>АО Росагролизинг</h3>
-                <p>Подробности уточняйте в отделе продаж</p>
+                <h3>Традиции & Технологии</h3>
+                <p> 
+                  Мы бережно храним вековые традиции российского земледелия, 
+                  сочетая их с самыми современными агротехнологиями
+                </p>
                 <span>01</span>
               </div>
               <div className='about-card'>
-                <h3>АО Росагролизинг</h3>
-                <p>Подробности уточняйте в отделе продаж</p>
+                <h3>Наша миссия</h3>
+                <p>
+                  Наша цель — обеспечивать рынок высококачественной сельхозпродукцией, 
+                  выращенной с ответственностью перед землей и потребителем.
+                </p>
                 <span>03</span>
               </div>
               <div className='about-card'>
-                <h3>АО Росагролизинг</h3>
-                <p>Подробности уточняйте в отделе продаж</p>
+                <h3>Сила региона</h3>
+                <p>
+                  ООО «Колос» — значимый игрок агропромышленного
+                  комплекса одного из ключевых аграрных регионов России.
+                </p>
                 <span>02</span>
               </div>
               <div className='about-card'>
-                <h3>АО Росагролизинг</h3>
-                <p>Подробности уточняйте в отделе продаж</p>
+                <h3>Наша философия</h3>
+                <p> Мы рассматриваем землю не как ресурс, а как наследие.</p>
                 <span>04</span>
               </div>
             </div>
@@ -139,23 +147,32 @@ export default function Home() {
                 <div className='chips__content-cards'>
                   <div>
                     <span>01</span>
-                    <h3>Собственное производство</h3>
-                    <p>Полный цикл контроля — для безупречного результата</p>
+                    <h3>Прозрачность на всех этапах</h3>
+                    <p>
+                      Мы внедряем систему прослеживаемости. Наши партнеры могут быть уверены в 
+                      происхождении и качестве зерна.
+                    </p>
                   </div>
                   <div>
                     <span>02</span>
-                    <h3>Собственное производство</h3>
-                    <p>Полный цикл контроля — для безупречного результата</p>
+                    <h3>Решения, а не предположения</h3>
+                    <p>Мы заменяем традиционный подход точными цифрами.</p>
                   </div>
                   <div>
                     <span>03</span>
-                    <h3>Собственное производство</h3>
-                    <p>Полный цикл контроля — для безупречного результата</p>
+                    <h3>Прямой диалог с партнером</h3>
+                    <p>
+                      Мы ценим время и ясность. Как производитель, 
+                      мы предлагаем прямые контракты без лишних посредников.
+                    </p>
                   </div>
                   <div>
                     <span>04</span>
-                    <h3>Собственное производство</h3>
-                    <p>Полный цикл контроля — для безупречного результата</p>
+                    <h3>Ферма как лаборатория</h3>
+                    <p>
+                      Наши поля — это не только производственные площади, 
+                      но и площадка для апробации новых технологий и сортов.
+                    </p>
                   </div>
                 </div>
                 <img src="../chips.jpg" alt="chips"/>
@@ -168,28 +185,19 @@ export default function Home() {
             <div className='news_content'>
               <h2>Новости</h2>
               <p>
-                Навесная конструкция бороны позволяет легко и быстро подключать 
-                её к трактору, что делает процесс обработки полей более 
-                удобным и эффективным. Благодаря своей маневренности и компактным размерам, 
-                дисковая борона может использоваться на участках с ограниченным 
-                пространством, а также в условиях сложного рельефа.
+                Будьте в курсе жизни «Колоса»: отчеты с полей, внедрение новых технологий, ключевые 
+                события и планы на будущее. Наша новостная лента — это честный рассказ о 
+                том, как мы создаем качественный продукт, заботясь о земле и строя надежный бизнес.
               </p>
               <div className='news_cards'>
                 {news.slice(0, 3).map((el) => ( 
-                  <div key={el.id_news} className='news-cards-el'>
-                    <img src={`${envImgUrl}/${el.img}`} alt={el.name} />
-                    <div>
-                      <h3>{el.name}</h3>
-                      <p>{el.description}</p>
-                      <p>{new Date(el.date).toLocaleDateString('ru-RU')}</p>
-                    </div>
-                  </div>
+                  <NewsCard key={el.id_news}  data={el}/>
                 ))}
               </div>
             </div>
           </PublicLayout>
         </section>
-        <section className='feedback'>
+        <section className='feedback' id='feedback'>
           <PublicLayout>
             <div className='feedback__content'>
               <div className='feedback__form'>
