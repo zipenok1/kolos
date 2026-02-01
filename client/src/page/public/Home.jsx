@@ -2,34 +2,68 @@ import { useEffect, useState } from 'react'
 import { useSimpleForm } from '../../hooks/useSimpleForm'
 import { createFormData } from '../../utils/formHelpers'
 import Header from '../../components/Header'
-import PublicLayout from '../../components/PublicLayout'
 import Slider from '../../components/Slider'
+import PublicLayout from '../../components/PublicLayout'
+import Footer from '../../components/Footer'
 import * as Api from '../../api/index'
 import '../../styles/home.css'
 
 export default function Home() {
   const [news, setNews] = useState([])
-  const { formValue, handleChange, resetForm } = useSimpleForm({
+  
+  const { 
+    formValue: newsletterForm, 
+    handleChange: handleNewsletterChange, 
+    resetForm: resetNewsletterForm 
+  } = useSimpleForm({
     email: ''
+  })
+
+  const { 
+    formValue: feedbackForm, 
+    handleChange: handleFeedbackChange, 
+    resetForm: resetFeedbackForm 
+  } = useSimpleForm({
+    name: '',
+    phone: '',
+    email: '',
+    message: ''
   })
 
   const envImgUrl = import.meta.env.VITE_IMG_URL
 
   const newsletterSubmit = async (e) => {
     e.preventDefault()
-    try{
-      const data = createFormData(formValue)
+    try {
+      const data = createFormData(newsletterForm)
       await Api.newsletter.post(data)
-      resetForm()
+      console.log(data, 'успех');
+      resetNewsletterForm()
     } catch(e) {
       console.log('ошибка: ' + (e.message))
     }
   }  
 
+  const feedbackSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      const data = createFormData(feedbackForm)
+      await Api.feedback.post(data)
+      console.log(data, 'успех');
+      resetFeedbackForm()
+    } catch(e) {
+      console.log('ошибка: ' + (e.message))
+    }
+  }
+
   useEffect(() => {
     (async () => {
-      const data = await Api.news.get()
-      setNews(data)
+      try {
+        const data = await Api.news.get()
+        setNews(data)
+      } catch(e) {
+        console.error('ошибка загрузки:', e)
+      }
     })()
   }, [])
 
@@ -85,8 +119,8 @@ export default function Home() {
                   type='email'
                   name='email'
                   placeholder='Email'
-                  value={formValue.email}
-                  onChange={handleChange}
+                  value={newsletterForm.email}
+                  onChange={handleNewsletterChange}
                 />      
                 <button type="submit">отправить</button>    
               </form>
@@ -142,7 +176,7 @@ export default function Home() {
               </p>
               <div className='news_cards'>
                 {news.slice(0, 3).map((el) => ( 
-                  <div key={el.id} className='news-cards-el'>
+                  <div key={el.id_news} className='news-cards-el'>
                     <img src={`${envImgUrl}/${el.img}`} alt={el.name} />
                     <div>
                       <h3>{el.name}</h3>
@@ -155,8 +189,49 @@ export default function Home() {
             </div>
           </PublicLayout>
         </section>
-
+        <section className='feedback'>
+          <PublicLayout>
+            <div className='feedback__content'>
+              <div className='feedback__form'>
+                <h2>Мы на связи</h2>
+                <form onSubmit={feedbackSubmit}>
+                  <input 
+                    type='text'
+                    name='name'
+                    placeholder='Имя'
+                    value={feedbackForm.name}
+                    onChange={handleFeedbackChange}
+                  />
+                  <input 
+                    type='tel'
+                    name='phone'
+                    placeholder='Телефон'
+                    value={feedbackForm.phone}
+                    onChange={handleFeedbackChange}
+                  />
+                  <input 
+                    type='email'
+                    name='email'
+                    placeholder='Email'
+                    value={feedbackForm.email}
+                    onChange={handleFeedbackChange}
+                  />
+                  <input 
+                    type='text'
+                    name='message'
+                    placeholder='Сообщение'
+                    value={feedbackForm.message}
+                    onChange={handleFeedbackChange}
+                  />  
+                  <button type='submit'>Отправить</button>
+                </form>
+              </div>
+              <img src="../chips.jpg" alt="feedback" />
+            </div>
+          </PublicLayout>
+        </section>
       </main>
+      <Footer/>
     </div>
   )
 }

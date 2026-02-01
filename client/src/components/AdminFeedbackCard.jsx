@@ -8,7 +8,7 @@ export default function AdminFeedbackCard({ el, get }) {
 
     const newsFields = [
         { name: 'name', label: 'Имя', placeholder: 'Имя'},
-        { name: 'phone', label: 'Телефон', placeholder: 'Телефон', type: 'phone' },
+        { name: 'phone', label: 'Телефон', placeholder: 'Телефон', type: 'tel' },
         { name: 'email', label: 'Почта', placeholder: 'Почта', type: 'email' },
         { name: 'message', label: 'Сообщение', placeholder: 'Сообщение'}
     ]
