@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import PublicLayout from "./PublicLayout"
 import '../styles/header.css'
 
-
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 

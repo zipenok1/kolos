@@ -1,9 +1,26 @@
 import Header from '../../components/Header'
 import PublicLayout from '../../components/PublicLayout'
 import Slider from '../../components/Slider'
+import * as Api from '../../api/index'
+import { useSimpleForm } from '../../hooks/useSimpleForm'
+import { createFormData } from '../../utils/formHelpers'
 import '../../styles/home.css'
 
 export default function Home() {
+  const { formValue, handleChange, resetForm } = useSimpleForm({
+    email: ''
+  })
+
+  const newsletterSubmit = async (e) => {
+    e.preventDefault()
+    try{
+      const data = createFormData(formValue)
+      await Api.newsletter.post(data)
+      resetForm()
+    } catch(e) {
+      console.log('ошибка: ' + (e.message))
+    }
+  }  
 
   return (
     <div>
@@ -45,6 +62,23 @@ export default function Home() {
                 <p>Подробности уточняйте в отделе продаж</p>
                 <span>04</span>
               </div>
+            </div>
+          </PublicLayout>
+        </section>
+        <section className='banner'>
+          <PublicLayout>
+            <div className='banner__content'>
+              <h2>Мы на связи</h2>
+              <form onSubmit={newsletterSubmit}>
+                <input 
+                  type='email'
+                  name='email'
+                  placeholder='Email'
+                  value={formValue.email}
+                  onChange={handleChange}
+                />      
+                <button type="submit">отправить</button>    
+              </form>
             </div>
           </PublicLayout>
         </section>
