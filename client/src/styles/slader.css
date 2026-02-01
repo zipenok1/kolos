@@ -38,12 +38,12 @@
     display: flex;
     flex-direction: column;
 }
-.slide-image {
+.slide-img {
     display: flex;
     justify-content: center;
 }
 
-.slide-image img {
+.slide-img img {
     max-height: 533.97px;
 }
 

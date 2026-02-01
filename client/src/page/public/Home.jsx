@@ -20,7 +20,11 @@ export default function Home() {
             <button>Каталог</button>
           </div>
         </section>
-        <Slider/>
+        {/* <Slider/>
+
+        <section className='about'>
+          
+        </section> */}
 
       </main>
     </div>

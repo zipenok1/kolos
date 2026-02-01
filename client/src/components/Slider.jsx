@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import PublicLayout from './PublicLayout'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import '../styles/slader.css'
-import PublicLayout from './PublicLayout'
 
 const slidesData = [
   {
@@ -15,7 +15,7 @@ const slidesData = [
   {
     id: 2,
     title: 'ЖИВОТНОВОДСТВО',
-    content: 'Описание животноводства. Профессиональное разведение сельскохозяйственных животных.',
+    content: 'Профессиональное разведение сельскохозяйственных животных.',
     img: '../slader1.png'
   },
   {
@@ -27,7 +27,7 @@ const slidesData = [
   {
     id: 4,
     title: 'ЭКСПОРТ',
-    content: 'Международная экспортная деятельность. Поставки продукции в различные страны мира.',
+    content: 'Экспортная деятельность. Поставки продукции в различные страны мира.',
     img: '../slader1.png'
   }
 ]
@@ -38,7 +38,7 @@ export default function Slider() {
   
   const handleTabClick = (index) => {
     if (swiperInstance) {
-      swiperInstance.slideTo(index);
+      swiperInstance.slideTo(index)
     }
   } 
 
@@ -63,12 +63,11 @@ export default function Slider() {
                   slidesPerView={1}
                   onSwiper={setSwiperInstance}
                   onSlideChange={(swiper) => setActiveSlide(swiper.activeIndex)}
-                  className="custom-swiper"
                 >
                   {slidesData.map((slide) => (
                     <SwiperSlide key={slide.id}>
                       <div className="slide-content">
-                        <div className="slide-image">
+                        <div className="slide-img">
                           <img src={slide.img} alt={slide.title} />
                         </div>
                         <div className="slide-text">

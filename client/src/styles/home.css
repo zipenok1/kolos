@@ -1,10 +1,10 @@
 .hero {
     display: flex;
     align-items: center;
-    gap: 100px;
+    gap: 140px;
 }
 .hero img{
-    height: 99vh;
+    height: 100vh;
 }
 
 .hero__content{
