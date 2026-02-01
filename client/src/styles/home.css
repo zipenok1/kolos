@@ -97,6 +97,59 @@
     border-radius: 50px;
 }
 
+.chips{
+    background: #fff;
+    padding: 60px 0;
+}
+.chips__container-desc{
+    margin-top: 40px;
+    margin-bottom: 60px;
+    max-width: 1465px;
+    width: 100%;
+    font-size: 28px;
+    font-weight: 500;
+    font-family: "Russo One";
+    text-transform: uppercase;
+}
+.chips__content{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+.chips__content img{
+    border-radius: 20px;
+    width: 100%;
+    flex: 1;
+}
+.chips__content-cards{
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+.chips__content-cards div{
+    flex: 1;
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid black;
+}
+.chips__content-cards div span{
+    font-weight: 500;
+    font-family: "Russo One";
+    text-transform: uppercase;
+    font-size: 20px;
+}
+.chips__content-cards div h3{
+    margin: 18px 0;
+    text-transform: uppercase;
+}
+.chips__content-cards div p{
+    font-size: 24px;
+    max-width: 348px;
+    width: 100%;
+}
+
 @media(max-width: 1325px){
     .hero {
         justify-content: space-between;
@@ -119,6 +172,9 @@
         flex: 1;
         width: auto;
     }
+    .chips__container-desc{
+        font-size: 22px;
+    }
 }
 @media(max-width: 1050px){
     .hero{
@@ -135,6 +191,17 @@
         gap: 50px;
     }
 }
+@media(max-width: 700px){
+    .about-card{
+        padding: 20px;
+        flex: 1 ; 
+    }
+    .about-card span{
+        bottom: 10px;
+        right: 10px;
+        font-size: 30px;
+    }
+}
 @media(max-width: 490px){
     .hero__content h1{
         font-size: 40px;
@@ -145,15 +212,7 @@
     .banner__content form input{
         width: 200px;
     }
-}
-@media(max-width: 700px){
-    .about-card{
-        padding: 20px;
-        flex: 1 ; 
-    }
-    .about-card span{
-        bottom: 10px;
-        right: 10px;
-        font-size: 30px;
+    .chips__content-cards div {
+        padding: 20px 14px;
     }
 }

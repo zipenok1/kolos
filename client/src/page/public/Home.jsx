@@ -82,7 +82,45 @@ export default function Home() {
             </div>
           </PublicLayout>
         </section>
+        <section className='chips'>
+          <PublicLayout>
+            <div className='chips__container'>
+              <h2>Наши Фишки</h2>
+              <p className='chips__container-desc'>
+                мы не просто "ферма". крупное, технологичное 
+                агрохолдинговое предприятие с замкнутым циклом
+              </p>
+              <div className='chips__content'>
+                <div className='chips__content-cards'>
+                  <div>
+                    <span>01</span>
+                    <h3>Собственное производство</h3>
+                    <p>Полный цикл контроля — для безупречного результата</p>
+                  </div>
+                  <div>
+                    <span>02</span>
+                    <h3>Собственное производство</h3>
+                    <p>Полный цикл контроля — для безупречного результата</p>
+                  </div>
+                  <div>
+                    <span>03</span>
+                    <h3>Собственное производство</h3>
+                    <p>Полный цикл контроля — для безупречного результата</p>
+                  </div>
+                  <div>
+                    <span>04</span>
+                    <h3>Собственное производство</h3>
+                    <p>Полный цикл контроля — для безупречного результата</p>
+                  </div>
+                </div>
+                <img src="../chips.jpg" alt="chips"/>
+              </div>
+            </div>
+          </PublicLayout>
+        </section>
+
         
+
       </main>
     </div>
   )
