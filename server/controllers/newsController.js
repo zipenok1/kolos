@@ -13,6 +13,22 @@ class NewsController {
         }
     }
 
+    async getById(req, res){
+        try{
+            const {id} = req.params
+            if(!id) return res.status(400).json('такого элемента не существует')
+                
+            const news = await News.findOne({where: { id_news: id }})
+            if(!news) return res.status(400).json('не существует')
+            
+            return res.status(200).json(news)
+        } catch(e){
+            return res.status(500).json({ 
+                message: `ошибка получения ${e}` 
+            })
+        }
+    }    
+
     async post(req, res){
         try{
             if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
@@ -42,10 +58,10 @@ class NewsController {
             if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
                 
             const {id} = req.params
+            if(!id) return res.status(400).json('не существует')
+                
             const {name, description, date} = req.body
             const img = FileService.getFile(req)
-
-            if(!id) return res.status(400).json('не существует')
 
             const news = await News.findOne({where: { id_news: id }})
             if(!news) return res.status(400).json('не существует')
