@@ -1,4 +1,4 @@
-const { Product } = require('../models/index')
+const { Product, Catalog } = require('../models/index')
 const FileService = require('../services/fileService')
 
 class ProductController {
@@ -11,6 +11,26 @@ class ProductController {
                 message: `ошибка получения ${e}` 
             })
         }
+    }
+
+    async getByCatalog(req, res){
+      try {
+        const {id} = req.params;
+        if (!id) return res.status(400).json('id не указан')
+        
+        const product = await Product.findAll({
+            where: { id_catalog: id },
+            include: [{ model: Catalog }] 
+        })
+        
+        if (!product) return res.status(404).json('не найден')
+        
+        return res.status(200).json(product)
+    } catch(e) {
+        return res.status(500).json({ 
+            message: `ошибка получения: ${e.message}` 
+        });
+    }
     }
 
     async post(req, res){
