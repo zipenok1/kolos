@@ -10,10 +10,10 @@
 .hero__content{
     display: flex;
     flex-direction: column;
-    max-width: 600px;
+    max-width: 610px;
     width: 100%;
     align-items: flex-start;
-    gap: 50px;
+    gap: 40px;
 }
 .hero__content h1{
     line-height: 60px;
@@ -256,7 +256,6 @@
     }
     .hero__content{
         align-items: center;
-        gap: 50px;
     }
 }
 @media(max-width: 700px){

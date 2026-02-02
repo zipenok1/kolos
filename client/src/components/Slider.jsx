@@ -80,7 +80,7 @@ export default function Slider() {
                 </Swiper>
               </div>
             </div>
-          </section>
+        </section>
     </PublicLayout>
   )
 }

@@ -73,9 +73,10 @@ export default function Home() {
           <div className='hero__content'>
             <h1>сельскохоз предприятие ООО «Колос»</h1>
             <p>
-              Мы производим почвообрабатывающие
-              агрегаты – от проектирования до сборки.
-              Наша техника работает в самых сложных условиях.
+              современный агрохолдинг, где вековые традиции земледелия встречаются 
+              с точными цифровыми технологиями. Мы выращиваем 
+              высококачественное зерно на плодородных землях России, вкладывая 
+              в каждый гектар наш опыт, заботу о земле и стремление к прогрессу.
             </p>
             <button>Каталог</button>
           </div>
@@ -173,7 +174,7 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-                <img src="../chips.jpg" alt="chips"/>
+                <img src="/chips.jpg" alt="chips"/>
               </div>
             </div>
           </PublicLayout>
@@ -232,7 +233,7 @@ export default function Home() {
                   <button type='submit'>Отправить</button>
                 </form>
               </div>
-              <img src="../feedback.jpg" alt="feedback" />
+              <img src="/feedback.jpg" alt="feedback" />
             </div>
           </PublicLayout>
         </section>
