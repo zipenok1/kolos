@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Header from '../../components/Header'
 import PublicLayout from '../../components/PublicLayout'
 import Footer from '../../components/Footer'
@@ -27,8 +27,11 @@ export default function Product() {
     <div>
       <Header/>
       <PublicLayout>
-        <div className='product'>
+        <div className='product'> 
           <h2>Продукты</h2>
+          <Link to={'/catalog'}>
+            🠔 Назад
+          </Link>
           <div className='product__content'>
             {product.map(el => (
               <Card key={el.id_product} id={el.id_product} data={el} type='product'/>
@@ -37,7 +40,6 @@ export default function Product() {
         </div>
       </PublicLayout>
       <Footer/>
-
     </div>
   )
 }
