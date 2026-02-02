@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import Header from '../../components/Header'
 import PublicLayout from '../../components/PublicLayout'
+import Footer from '../../components/Footer'
 import NewsCard from '../../components/NewsCard'
 import * as Api from '../../api/index'
-import Footer from '../../components/Footer'
 import '../../styles/news.css'
 
 export default function News() {

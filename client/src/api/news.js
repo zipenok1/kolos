@@ -16,6 +16,10 @@ export const get = async () => {
   return (await api.get('news/')).data
 }
 
+export const getById = async (id) => {
+  return (await api.get(`news/${id}`)).data
+}
+
 export const post = async (values) => {
   return (await api.post('news/', values, {
     headers: {

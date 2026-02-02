@@ -119,6 +119,7 @@
 }
 .chips__content img{
     border-radius: 20px;
+    max-width: 830px;
     width: 100%;
     flex: 1;
 }
@@ -209,6 +210,11 @@
     width: 100%;
 }
 
+@media(max-width: 1356px){
+    .chips__content img {
+        max-width: none;
+    }
+}
 @media(max-width: 1325px){
     .hero {
         justify-content: space-between;

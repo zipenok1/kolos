@@ -2,19 +2,29 @@
     flex: 1 0 400px;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 }
 .news-cards-el img{
     max-height: 350px;
     width: 100%;
     height: 100%;
     border-radius: 20px;
+    opacity: 0.85;
+    transition: all 0.3s ease;
 }
 .news-cards-el div{
-    padding: 30px 15px;
+    padding: 30px 10px;
+    transition: padding 0.5s ease;
 }
 .news-cards-el div p{
     margin-top: 10px;
     font-size: 18px;
+}
+.news-cards-el:hover div{
+    padding: 30px 20px;
+}
+.news-cards-el:hover img{
+    opacity: 1;
 }
 
 @media(max-width: 600px){

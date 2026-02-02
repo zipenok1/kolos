@@ -98,7 +98,7 @@ export default function Home() {
                   Наша цель — обеспечивать рынок высококачественной сельхозпродукцией, 
                   выращенной с ответственностью перед землей и потребителем.
                 </p>
-                <span>03</span>
+                <span>02</span>
               </div>
               <div className='about-card'>
                 <h3>Сила региона</h3>
@@ -106,7 +106,7 @@ export default function Home() {
                   ООО «Колос» — значимый игрок агропромышленного
                   комплекса одного из ключевых аграрных регионов России.
                 </p>
-                <span>02</span>
+                <span>03</span>
               </div>
               <div className='about-card'>
                 <h3>Наша философия</h3>
@@ -232,7 +232,7 @@ export default function Home() {
                   <button type='submit'>Отправить</button>
                 </form>
               </div>
-              <img src="../chips.jpg" alt="feedback" />
+              <img src="../feedback.jpg" alt="feedback" />
             </div>
           </PublicLayout>
         </section>
