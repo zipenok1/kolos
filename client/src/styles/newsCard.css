@@ -29,6 +29,15 @@
 
 @media(max-width: 600px){
     .news-cards-el{
-        flex: 1 0 280px;
+        flex: 1 0 240px;
+    }
+    .news-cards-el div{
+        padding: 18px 6px;
+    }
+    .news-cards-el:hover div{
+        padding: 18px 8px;
+    }
+    .news-cards-el div p{
+        font-size: 16px;
     }
 }
