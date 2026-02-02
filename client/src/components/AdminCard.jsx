@@ -56,10 +56,8 @@ export default function AdminCard({
                     Управление
                 </button>
             </div>
-            
             <AdminModal isOpen={isOpen} onClose={handleModalClose}>
                 <h3>{action === 'update' ? 'Редактировать' : 'Удалить'}</h3>
-                
                 {action === 'update' ? (
                     <form onSubmit={handleSubmit}>
                         {fields.map(field => (
@@ -82,7 +80,6 @@ export default function AdminCard({
                                 />
                             )
                         ))}
-
                         <div className='modal__button'>
                             {api.update ?    
                                 <button type="submit">

@@ -20,4 +20,4 @@ const AppRouter = observer(() => {
     );
   })
   
-export default AppRouter;
+export default AppRouter

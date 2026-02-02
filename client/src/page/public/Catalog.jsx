@@ -15,7 +15,7 @@ export default function Catalog() {
         const data = await Api.catalog.get()
         setCatalog(data)
       } catch(e){
-        console.error('ошибка загрузки:', e)
+        console.error('ошибка загрузки:', (e.message))
       }
     })()
   }, [])

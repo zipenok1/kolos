@@ -18,7 +18,7 @@ export default function Product() {
         const data = await Api.product.getByCatalog(id)
         setProduct(data)
       } catch(e){
-        console.error('ошибка загрузки:', e)
+        console.error('ошибка загрузки:', (e.message))
       }
     })()
   }, [id])

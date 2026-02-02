@@ -15,7 +15,7 @@ export default function News() {
         const data = await Api.news.get()
         setNews(data)
       } catch(e) {
-        console.error('ошибка загрузки:', e)
+        console.error('ошибка загрузки:', (e.message))
       }
     })()
   }, [])

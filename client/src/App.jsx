@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite'
 import AppRouter from './components/AppRouter'
 
 const App = observer(() => {
+  
   const { user } = useContext(Context)
 
   if (user.isLoading) {

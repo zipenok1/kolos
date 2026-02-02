@@ -1,4 +1,4 @@
-import { createPortal } from 'react-dom';
+import { createPortal } from 'react-dom'
 
 export default function AdminModal({ isOpen, onClose, children }) {  
 

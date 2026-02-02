@@ -29,8 +29,8 @@ class CatalogController {
 
             return res.json(catalog)
         } catch(e){
-            return res.status(400).json({ 
-                message: e.message  
+            return res.status(500).json({ 
+                message: `ошибка добавления ${e}`
             })
         }
     }
