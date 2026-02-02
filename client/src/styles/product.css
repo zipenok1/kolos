@@ -1,0 +1,10 @@
+.product{
+    padding: 60px 0;
+}
+
+.product__content{
+    margin-top: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}

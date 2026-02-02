@@ -16,6 +16,10 @@ export const get = async () => {
   return (await api.get('product/')).data
 }
 
+export const getByCatalog = async (id) => {
+  return (await api.get(`product/${id}`)).data
+}
+
 export const post = async (values) => {
   return (await api.post('product/', values, {
     headers: {

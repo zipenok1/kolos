@@ -17,7 +17,7 @@ export const publicRoutes = [
   { path: '/auth', element: <Authorization /> },
   { path: '/', element: <Home /> },
   { path: '/catalog', element: <Catalog /> },
-  { path: '/product', element: <Product /> },
+  { path: '/catalog/product/:id', element: <Product /> },
   { path: '/news', element: <News /> },
   { path: '/news/:id', element: <NewsDetailed /> }
 ]

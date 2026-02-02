@@ -34,6 +34,8 @@ export default function Catalog() {
             ) : 
             catalog.map(el => (
               <Link 
+                key={el.id_catalog}
+                to={`/catalog/product/${el.id_catalog}`}
                 className="catalog-card"
               >
                 <img src={`${import.meta.env.VITE_IMG_URL}/${el.img}`} alt={el.name}/>

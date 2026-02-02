@@ -4,7 +4,7 @@ import { createFormData } from '../../utils/formHelpers'
 import Header from '../../components/Header'
 import Slider from '../../components/Slider'
 import PublicLayout from '../../components/PublicLayout'
-import NewsCard from '../../components/NewsCard'
+import Card from '../../components/Card'
 import Footer from '../../components/Footer'
 import * as Api from '../../api/index'
 import '../../styles/home.css'
@@ -189,7 +189,7 @@ export default function Home() {
               </p>
               <div className='news_cards'>
                 {news.slice(0, 3).map((el) => ( 
-                  <NewsCard key={el.id_news}  data={el}/>
+                  <Card key={el.id_news} id={el.id_news} data={el} type='news'/>
                 ))}
               </div>
             </div>

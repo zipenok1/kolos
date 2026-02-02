@@ -9,7 +9,7 @@
     gap: 40px;
 }
 .catalog-card{
-    flex: 1 0 400px;
+    flex: 1 0 240px;
     display: flex;
     flex-direction: column;
     cursor: pointer;

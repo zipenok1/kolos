@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import Header from '../../components/Header'
 import PublicLayout from '../../components/PublicLayout'
 import Footer from '../../components/Footer'
-import NewsCard from '../../components/NewsCard'
+import Card from '../../components/Card'
 import * as Api from '../../api/index'
 import '../../styles/news.css'
 
@@ -33,7 +33,7 @@ export default function News() {
               </div>
             ) :
             news.map(el => (
-              <NewsCard key={el.id_news} data={el}/>
+              <Card key={el.id_news} id={el.id_news} data={el} type='news'/>
             ))}
           </div>
         </PublicLayout>
