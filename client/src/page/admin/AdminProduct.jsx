@@ -73,12 +73,14 @@ export default function AdminProduct() {
               placeholder="заголовок"
               value={formValue.name}
               onChange={handleChange}
+              required
             />
             <input 
               type="text" 
               name='description'
               placeholder="описание"
               value={formValue.description}
+              required
               onChange={handleChange}
             />
             <input 
@@ -87,6 +89,7 @@ export default function AdminProduct() {
               placeholder="каталог"
               value={formValue.id_catalog}
               onChange={handleChange}
+              required
             />
             <input 
               type="file"

@@ -73,6 +73,7 @@ export default function AdminNews() {
               placeholder="заголовок"
               value={formValue.name}
               onChange={handleChange}
+              required
             />
             <input 
               type="text" 
@@ -80,12 +81,14 @@ export default function AdminNews() {
               placeholder="описание"
               value={formValue.description}
               onChange={handleChange}
+              required
             />
             <input 
               type="date" 
               name='date'
               value={formValue.date}
               onChange={handleChange}
+              required
             />
             <input 
               type="file"

@@ -77,6 +77,7 @@ export default function AdminCard({
                                     placeholder={field.placeholder || field.label}
                                     value={formValue[field.name]}
                                     onChange={handleChange}
+                                    required
                                 />
                             )
                         ))}

@@ -71,6 +71,7 @@ export default function adminContent() {
               placeholder="заголовок"
               value={formValue.name}
               onChange={handleChange}
+              required
             />
             <input 
               type="file"

@@ -4,6 +4,7 @@ import Product from "../page/public/Product"
 import Home from "../page/public/Home"
 import News from "../page/public/News"
 import NewsDetailed from "../page/public/NewsDetailed"
+import Politick from "../page/public/Politick"
 
 import AdminMenu from "../page/admin/AdminMenu"
 import AdminCatalog from '../page/admin/AdminCatalog'
@@ -19,7 +20,8 @@ export const publicRoutes = [
   { path: '/catalog', element: <Catalog/> },
   { path: '/catalog/product/:id', element: <Product/> },
   { path: '/news', element: <News/> },
-  { path: '/news/:id', element: <NewsDetailed/> }
+  { path: '/news/:id', element: <NewsDetailed/> },
+  { path: '/politick', element: <Politick/> }
 ]
 
 const withAdminLayout = (Component) => (

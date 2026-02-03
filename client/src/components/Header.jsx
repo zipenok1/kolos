@@ -82,6 +82,7 @@ export default function Header() {
                 placeholder='Имя'
                 value={formValue.name}
                 onChange={handleChange}
+                required
               />
               <input 
                 type='tel'
@@ -89,6 +90,7 @@ export default function Header() {
                 placeholder='Телефон'
                 value={formValue.phone}
                 onChange={handleChange}
+                required
               />
               <input 
                 type='email'
@@ -96,6 +98,7 @@ export default function Header() {
                 placeholder='Email'
                 value={formValue.email}
                 onChange={handleChange}
+                required
               />
               <input 
                 type='text'
@@ -103,6 +106,7 @@ export default function Header() {
                 placeholder='Сообщение'
                 value={formValue.message}
                 onChange={handleChange}
+                required
               />  
               <button type='submit'>Отправить</button>
             </form>            

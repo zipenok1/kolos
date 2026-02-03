@@ -2,13 +2,24 @@
     padding: 60px 0;
     background: rgba(32, 29, 27, 1);
 }
-.foonter__content ul{
+.foonter__content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+    align-items: center;
+}
+.footer__nav{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 60px;
 }
-.foonter__content a{
+.footer__nav a{
     color: #fff;
     font-size: 22px;
+}
+.foonter__content-politick{
+    font-size: 18px;
+    color: #b1b1b1;
 }

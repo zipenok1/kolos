@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useSimpleForm } from '../../hooks/useSimpleForm'
 import { createFormData } from '../../utils/formHelpers'
 import Header from '../../components/Header'
@@ -78,7 +79,7 @@ export default function Home() {
               высококачественное зерно на плодородных землях России, вкладывая 
               в каждый гектар наш опыт, заботу о земле и стремление к прогрессу.
             </p>
-            <button>Каталог</button>
+            <Link to={'/catalog'}>Каталог</Link>
           </div>
         </section>
         <Slider/>
@@ -208,6 +209,7 @@ export default function Home() {
                     placeholder='Имя'
                     value={feedbackForm.name}
                     onChange={handleFeedbackChange}
+                    required
                   />
                   <input 
                     type='tel'
@@ -215,6 +217,7 @@ export default function Home() {
                     placeholder='Телефон'
                     value={feedbackForm.phone}
                     onChange={handleFeedbackChange}
+                    required
                   />
                   <input 
                     type='email'
@@ -222,6 +225,7 @@ export default function Home() {
                     placeholder='Email'
                     value={feedbackForm.email}
                     onChange={handleFeedbackChange}
+                    required
                   />
                   <input 
                     type='text'
@@ -229,6 +233,7 @@ export default function Home() {
                     placeholder='Сообщение'
                     value={feedbackForm.message}
                     onChange={handleFeedbackChange}
+                    required
                   />  
                   <button type='submit'>Отправить</button>
                 </form>
