@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link } from 'react-router-dom'
-import * as Api from '../../api/index'
 import AdminFeedbackCard from "../../components/AdminFeedbackCard"
+import * as Api from '../../api/index'
 
 export default function AdminFeedback() {
   const [feedback, setFeedback] = useState([])

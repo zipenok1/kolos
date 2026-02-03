@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import { Link } from 'react-router-dom'
-import * as Api from '../../api/index'
-import AdminModal from '../../components/AdminModal'
-import AdminProductCard from "../../components/AdminProductCard"
 import { useSimpleForm } from "../../hooks/useSimpleForm"
 import { createFormData } from "../../utils/formHelpers"
+import AdminProductCard from "../../components/AdminProductCard"
+import Modal from '../../components/Modal'
+import * as Api from '../../api/index'
 
 export default function AdminProduct() { 
   const [product, setProduct] = useState([])
@@ -61,7 +61,7 @@ export default function AdminProduct() {
           <AdminProductCard key={el.id_product} el={el} get={getProduct}/>
         ))}
       </div> 
-      <AdminModal
+      <Modal
         isOpen={isOpen} 
         onClose={handleModalClose}
       >
@@ -97,7 +97,7 @@ export default function AdminProduct() {
                 Добавить
             </button>
           </form>    
-      </AdminModal>
+      </Modal>
     </div>
   )
 }

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import { Link } from 'react-router-dom'
-import * as Api from '../../api/index'
-import AdminModal from '../../components/AdminModal'
-import AdminNewsCard from "../../components/AdminNewsCard"
 import { useSimpleForm } from "../../hooks/useSimpleForm"
 import { createFormData } from "../../utils/formHelpers"
+import AdminNewsCard from "../../components/AdminNewsCard"
+import Modal from '../../components/Modal'
+import * as Api from '../../api/index'
 
 export default function AdminNews() {
   const [news, setNews] = useState([])
@@ -61,7 +61,7 @@ export default function AdminNews() {
           <AdminNewsCard key={el.id_news} el={el} get={getNews}/>
         ))}
       </div>
-      <AdminModal
+      <Modal
         isOpen={isOpen} 
         onClose={handleModalClose}
       >
@@ -96,7 +96,7 @@ export default function AdminNews() {
                 Добавить
             </button>
           </form>    
-      </AdminModal>   
+      </Modal>   
     </div>
   )
 }

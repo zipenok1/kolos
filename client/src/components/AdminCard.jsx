@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import AdminModal from './AdminModal' 
 import { useSimpleForm } from '../hooks/useSimpleForm'
 import { createFormData } from '../utils/formHelpers'
+import Modal from './Modal' 
 
 export default function AdminCard({ 
   el, 
@@ -56,7 +56,7 @@ export default function AdminCard({
                     Управление
                 </button>
             </div>
-            <AdminModal isOpen={isOpen} onClose={handleModalClose}>
+            <Modal isOpen={isOpen} onClose={handleModalClose}>
                 <h3>{action === 'update' ? 'Редактировать' : 'Удалить'}</h3>
                 {action === 'update' ? (
                     <form onSubmit={handleSubmit}>
@@ -116,7 +116,7 @@ export default function AdminCard({
                         </div>
                     </div>
                 )}
-            </AdminModal>
+            </Modal>
         </div>
     )
 }

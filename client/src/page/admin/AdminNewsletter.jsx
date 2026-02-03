@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link } from 'react-router-dom'
-import * as Api from '../../api/index'
 import AdminNewsletterCard from "../../components/AdminNewsletterCard" 
+import * as Api from '../../api/index'
 
 export default function AdminNewsletter() {
   const [newsletter, setNewsletter] = useState([])

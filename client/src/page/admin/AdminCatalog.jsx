@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import * as Api from '../../api/index'
-import AdminModal from '../../components/AdminModal'
-import AdminCatalogCard from '../../components/AdminCatalogCard' 
 import { useSimpleForm } from "../../hooks/useSimpleForm"
 import { createFormData } from "../../utils/formHelpers"
+import Modal from '../../components/Modal'
+import AdminCatalogCard from '../../components/AdminCatalogCard' 
+import * as Api from '../../api/index'
 
 export default function adminContent() {
   const [catalog, setCatalog] = useState([])
@@ -59,7 +59,7 @@ export default function adminContent() {
           <AdminCatalogCard key={el.id_catalog}  el={el} get={getCatalog}/>
         ))}
       </div>
-      <AdminModal
+      <Modal
         isOpen={isOpen} 
         onClose={handleModalClose}
       >
@@ -81,7 +81,7 @@ export default function adminContent() {
                 Добавить
             </button>
           </form>    
-      </AdminModal>
+      </Modal>
     </div>
   )
 }
