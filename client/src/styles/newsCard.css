@@ -14,14 +14,10 @@
 }
 .news-cards-el div{
     padding: 30px 10px;
-    transition: padding 0.5s ease;
 }
 .news-cards-el div p{
     margin-top: 10px;
     font-size: 18px;
-}
-.news-cards-el:hover div{
-    padding: 30px 20px;
 }
 .news-cards-el:hover img{
     opacity: 1;
@@ -33,9 +29,6 @@
     }
     .news-cards-el div{
         padding: 18px 6px;
-    }
-    .news-cards-el:hover div{
-        padding: 18px 8px;
     }
     .news-cards-el div p{
         font-size: 16px;

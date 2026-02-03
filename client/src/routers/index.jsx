@@ -14,17 +14,17 @@ import AdminNewsletter from '../page/admin/AdminNewsletter'
 import AdminLayout from '../components/AdminLayout'
 
 export const publicRoutes = [
-  { path: '/auth', element: <Authorization /> },
-  { path: '/', element: <Home /> },
-  { path: '/catalog', element: <Catalog /> },
-  { path: '/catalog/product/:id', element: <Product /> },
-  { path: '/news', element: <News /> },
-  { path: '/news/:id', element: <NewsDetailed /> }
+  { path: '/auth', element: <Authorization/> },
+  { path: '/', element: <Home/> },
+  { path: '/catalog', element: <Catalog/> },
+  { path: '/catalog/product/:id', element: <Product/> },
+  { path: '/news', element: <News/> },
+  { path: '/news/:id', element: <NewsDetailed/> }
 ]
 
 const withAdminLayout = (Component) => (
   <AdminLayout>
-    <Component />
+    <Component/>
   </AdminLayout>
 )
 
