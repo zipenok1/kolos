@@ -235,6 +235,14 @@ export default function Home() {
                     onChange={handleFeedbackChange}
                     required
                   />  
+                  <Link 
+                    to={'/politick'}
+                    target="_blank" rel="noopener noreferrer"   
+                  >
+                    Нажимая на кнопку "Отправить", я подтверждаю, что ознакомился  
+                    с Политикой обработки персональных данных и даю согласие на обработку  
+                    всех моих персональных данных указанных в форме
+                  </Link>
                   <button type='submit'>Отправить</button>
                 </form>
               </div>

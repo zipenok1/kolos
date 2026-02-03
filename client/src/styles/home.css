@@ -197,8 +197,16 @@
     font-size: 32px;
     outline: none;
 }
+.feedback__form form > a{
+    font-size: 20px;
+    color: rgb(75, 75, 75);
+    transition: color 0.4s ease;
+}
+.feedback__form form > a:hover{
+    color: rgb(0, 0, 0);
+}
 .feedback__form form button{
-    margin-top: 18px;
+    margin-top: 8px;
     border: 1px solid black;
     background: none;
     padding: 18px 40px;
@@ -270,6 +278,9 @@
         font-size: 30px;
     }
     .news-cards-el div p{
+        font-size: 16px;
+    }
+    .feedback__form form > a{
         font-size: 16px;
     }
 }

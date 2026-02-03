@@ -10,6 +10,7 @@ import '../styles/header.css'
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isChecked, setIsChecked] = useState(false)
 
   const { formValue, handleChange, resetForm } = useSimpleForm({
     name: '',
@@ -108,6 +109,22 @@ export default function Header() {
                 onChange={handleChange}
                 required
               />  
+              <div className="checkbox__content">
+                <input
+                  className="checkbox"
+                  type='checkbox'
+                  name='checkbox'
+                  onChange={() => setIsChecked(!isChecked)}
+                  checked={isChecked}
+                  required
+                />
+                <Link 
+                  to={'/politick'}
+                  target="_blank" rel="noopener noreferrer"   
+                >
+                  Политика обработки персональных данных
+                </Link>
+              </div>
               <button type='submit'>Отправить</button>
             </form>            
           </Modal>
