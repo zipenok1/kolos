@@ -129,6 +129,7 @@ export default function Home() {
                   placeholder='Email'
                   value={newsletterForm.email}
                   onChange={handleNewsletterChange}
+                  required
                 />      
                 <button type="submit">отправить</button>    
               </form>
