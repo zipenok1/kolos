@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useQuery } from "@tanstack/react-query"
 import { Link, useParams } from 'react-router-dom'
 import Header from '../../components/Header'
 import PublicLayout from '../../components/PublicLayout'
@@ -8,20 +8,16 @@ import * as Api from '../../api/index'
 import '../../styles/product.css'
 
 export default function Product() {
-  const [product, setProduct] = useState([])
-
   const {id} = useParams()
 
-  useEffect(() => {
-    (async () => {
-      try{
-        const data = await Api.product.getByCatalog(id)
-        setProduct(data)
-      } catch(e){
-        console.error('ошибка загрузки:', (e.message))
-      }
-    })()
-  }, [id])
+  const {
+    data: product = [],
+  } = useQuery({
+    queryKey: ["product", id],
+    queryFn: () => Api.product.getByCatalog(id),
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 20    
+  })
 
   return (
     <div>
