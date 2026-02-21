@@ -50,7 +50,7 @@
 
 .adminContent-post{
   margin-top: 40px;
-  background-color: rgb(90, 204, 75);
+  background: #49a54e;
   color: #fff;
   padding: 12px 24px;
   font-size: 18px;
@@ -62,7 +62,7 @@
   padding: 10px 20px;
   font-size: 16px;
   border-radius: 8px;
-  background-color: rgb(90, 204, 75);
+  background: #49a54e;
   color: white;
   border: none;
   margin-top: 10px;
@@ -86,10 +86,16 @@
 .modal__content {
   margin: 0 auto;
   background: white;
-  padding: 30px;
+  padding: 20px 24px;
   border-radius: 12px;
   width: 420px;
   position: relative;
+}
+
+.modal__content p{
+  text-align: center;
+  letter-spacing: -0.10px;
+  padding: 10px 0 0 0;
 }
 
 .modal__close {
@@ -143,8 +149,8 @@
   font-size: 18px;
 }
 .modal__content .modal__button-del{
-  background-color: #ce322d;
+  background: #f44336;
 }
 .modal__content .modal__button-cancel{
-  background-color: #a3a3a3;
+ background: #a3a3a3;
 }
