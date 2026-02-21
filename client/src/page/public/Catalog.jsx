@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useQuery } from "@tanstack/react-query"
 import { Link } from "react-router-dom"
 import Header from "../../components/Header"
 import Footer from "../../components/Footer"
@@ -7,18 +7,46 @@ import * as Api from '../../api/index'
 import '../../styles/catalog.css'
 
 export default function Catalog() {
-  const [catalog, setCatalog] = useState([])
+  const { 
+    data: catalog, 
+    isLoading, 
+    error, 
+    isError 
+  } = useQuery({
+    queryKey: ["catalog"],
+    queryFn: Api.catalog.get,
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 15
+  })
 
-  useEffect(() => {
-    (async() => {
-      try{
-        const data = await Api.catalog.get()
-        setCatalog(data)
-      } catch(e){
-        console.error('ошибка:', (e.message))
-      }
-    })()
-  }, [])
+  const renderContent = () => {
+     if (isLoading) return (
+      <div className="content-none">
+        <p>Загрузка каталога...</p>
+      </div>
+    )
+    if (isError) return (
+      <div className="content-none">
+        <p>Ошибка: {error.message}</p>
+      </div>
+    )
+    if (catalog?.length === 0) return (
+      <div className="content-none">
+        <p>Пусто...</p>
+      </div>
+    )
+    
+    return catalog?.map(el => (
+      <Link 
+        key={el.id_catalog}
+        to={`/catalog/product/${el.id_catalog}`}
+        className="catalog-card"
+      >
+        <img src={`${import.meta.env.VITE_IMG_URL}/${el.img}`} alt={el.name}/>
+        <h3>{el.name}</h3>
+      </Link>
+    ))
+  }
 
   return (
     <div>
@@ -27,21 +55,7 @@ export default function Catalog() {
         <PublicLayout>
           <h2>Каталог</h2>
           <div className="catalog__content">
-            {catalog.length === 0 ? (
-              <div className="content-none">
-                <p>Пусто...</p>
-              </div>
-            ) : 
-            catalog.map(el => (
-              <Link 
-                key={el.id_catalog}
-                to={`/catalog/product/${el.id_catalog}`}
-                className="catalog-card"
-              >
-                <img src={`${import.meta.env.VITE_IMG_URL}/${el.img}`} alt={el.name}/>
-                <h3>{el.name}</h3>
-              </Link>
-            ))}
+            {renderContent()}
           </div>
         </PublicLayout>
       </div>
