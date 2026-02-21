@@ -34,10 +34,6 @@ export default function Header() {
     message: ''
   })  
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
-
   useEffect(() => {
     if (isMenuOpen || isModalOpen) {
       document.body.style.overflow = 'hidden'
@@ -49,6 +45,10 @@ export default function Header() {
     }
   }, [isMenuOpen, isModalOpen])
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
+
   const handleModalClose = () => {
     setIsModalOpen(false)
     resetForm()
@@ -58,7 +58,9 @@ export default function Header() {
   return (
     <PublicLayout>
       <header className="header">
-          <img src="/logo.svg" alt="logo" />
+          <div className="logo-border">
+            <img src="/logo.svg" alt="logo" />
+          </div>
           <nav className={`header__content ${isMenuOpen ? 'active' : ''}`}>
             <li><Link to={'/'}>Главная</Link></li>
             <li><Link to={'/catalog'}>Каталог</Link></li>
