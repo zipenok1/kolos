@@ -6,6 +6,14 @@
     gap: 60px;
     align-items: center;
 }
+
+.logo-border{
+    background: #fff;
+    padding: 8px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+}
 .header img{
     width: 34px;
 }
@@ -55,6 +63,7 @@
     height: 22px;
 }
 .checkbox__content > a{
+    letter-spacing: 0.43px;
     margin-right: 4px;
     color: rgb(75, 75, 75);
     font-size: 14px;
@@ -107,10 +116,11 @@
     }
     .checkbox__content > input{
         margin-left: 0px;
-        max-width: 20px;
-        height: 20px;
+        max-width: 18px;
+        height: 18px;
     }
     .checkbox__content > a{
+        letter-spacing: -0.32px;
         margin-right: 0px;
     }  
 }

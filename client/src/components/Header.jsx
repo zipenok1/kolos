@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useMutation } from "@tanstack/react-query"
 import { Link } from 'react-router-dom'
 import { useSimpleForm } from "../hooks/useSimpleForm"
 import { createFormData } from "../utils/formHelpers"
@@ -11,6 +12,20 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isChecked, setIsChecked] = useState(false)
+  
+  const submitMutation = useMutation({
+    mutationFn: (data) => Api.feedback.post(createFormData(data)),
+    onSuccess: () => {
+      setIsModalOpen(false)
+      resetForm()
+      setIsChecked(false)
+    },
+    onError: (error) => {
+      console.log('ошибка: ' + (error.message))
+      setIsModalOpen(false)
+      setIsChecked(false)
+    }
+  })
 
   const { formValue, handleChange, resetForm } = useSimpleForm({
     name: '',
@@ -18,10 +33,6 @@ export default function Header() {
     email: '',
     message: ''
   })  
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
 
   useEffect(() => {
     if (isMenuOpen || isModalOpen) {
@@ -33,29 +44,23 @@ export default function Header() {
       document.body.style.overflow = 'auto'
     }
   }, [isMenuOpen, isModalOpen])
-  
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    try{
-      const data = createFormData(formValue)
-      await Api.feedback.post(data)
-      setIsModalOpen(false)
-      resetForm()
-    } catch(e){
-      console.log('ошибка: ' + (e.message))
-      setIsModalOpen(false)
-    }
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
   }
 
   const handleModalClose = () => {
     setIsModalOpen(false)
     resetForm()
+    setIsChecked(false) 
   }
 
   return (
     <PublicLayout>
       <header className="header">
-          <img src="/logo.svg" alt="logo" />
+          <div className="logo-border">
+            <img src="/logo.svg" alt="logo" />
+          </div>
           <nav className={`header__content ${isMenuOpen ? 'active' : ''}`}>
             <li><Link to={'/'}>Главная</Link></li>
             <li><Link to={'/catalog'}>Каталог</Link></li>
@@ -76,7 +81,10 @@ export default function Header() {
             onClose={handleModalClose}
           >
             <h3>Мы на связи</h3>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(e) => {
+              e.preventDefault()
+              submitMutation.mutate(formValue)
+            }}>
               <input 
                 type='text'
                 name='name'

@@ -255,10 +255,11 @@
 }
 @media(max-width: 1050px){
     .hero{
-        padding-top: 60px;
+        padding-top: 0px;
         justify-content: center;
         text-align: center;
         margin: auto;
+        height: 90vh;
     }
     .hero img{
         display: none;

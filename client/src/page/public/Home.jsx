@@ -1,18 +1,61 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { useSimpleForm } from '../../hooks/useSimpleForm'
 import { createFormData } from '../../utils/formHelpers'
 import Header from '../../components/Header'
 import Slider from '../../components/Slider'
 import PublicLayout from '../../components/PublicLayout'
 import Card from '../../components/Card'
+import Toast from '../../components/Toast'
 import Footer from '../../components/Footer'
 import * as Api from '../../api/index'
 import '../../styles/home.css'
 
 export default function Home() {
-  const [news, setNews] = useState([])
-  
+  const [toast, setToast] = useState(null)
+
+  const {data: news = []} = useQuery({
+    queryKey: ["home_news"],
+    queryFn: Api.news.get,
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 20    
+  })
+
+  const newsletterMutation = useMutation({
+    mutationFn: (data) => Api.newsletter.post(createFormData(data)),
+    onSuccess: () => {
+      resetNewsletterForm()
+      setToast({
+        message: 'Спасибо за подписку!',
+        type: 'success'
+      })
+    },
+    onError: (error) => {
+      setToast({
+        message: 'Ошибка подписки: ' + error.message,
+        type: 'error'
+      })
+    }
+  })
+
+  const feedbackMutation = useMutation({
+    mutationFn: (data) => Api.feedback.post(createFormData(data)),
+    onSuccess: () => {
+      resetFeedbackForm()
+      setToast({
+        message: 'Отправлено!',
+        type: 'success'
+      })
+    },
+    onError: (error) => {
+      setToast({
+        message: 'Ошибка отправки: ' + error.message,
+        type: 'error'
+      })
+    }
+  })
+
   const { 
     formValue: newsletterForm, 
     handleChange: handleNewsletterChange, 
@@ -30,43 +73,17 @@ export default function Home() {
     phone: '',
     email: '',
     message: ''
-  })
-
-  const newsletterSubmit = async (e) => {
-    e.preventDefault()
-    try {
-      const data = createFormData(newsletterForm)
-      await Api.newsletter.post(data)
-      resetNewsletterForm()
-    } catch(e) {
-      console.log('ошибка: ' + (e.message))
-    }
-  }  
-
-  const feedbackSubmit = async (e) => {
-    e.preventDefault()
-    try {
-      const data = createFormData(feedbackForm)
-      await Api.feedback.post(data)
-      resetFeedbackForm()
-    } catch(e) {
-      console.log('ошибка: ' + (e.message))
-    }
-  }
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const data = await Api.news.get()
-        setNews(data)
-      } catch(e) {
-        console.error('ошибка загрузки:', (e.message))
-      }
-    })()
-  }, [])
+  }) 
 
   return (
     <div>
+      {toast && (
+        <Toast 
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
       <Header/>
       <main>
         <section className='hero'>
@@ -122,7 +139,10 @@ export default function Home() {
           <PublicLayout>
             <div className='banner__content'>
               <h2>Мы на связи</h2>
-              <form onSubmit={newsletterSubmit}>
+              <form onSubmit={(e) => {            
+                e.preventDefault()
+                newsletterMutation.mutate(newsletterForm)
+              }}>
                 <input 
                   type='email'
                   name='email'
@@ -131,7 +151,12 @@ export default function Home() {
                   onChange={handleNewsletterChange}
                   required
                 />      
-                <button type="submit">отправить</button>    
+                <button 
+                  type="submit"
+                  disabled={newsletterMutation.isPending}  
+                >
+                  Подписаться
+                </button>    
               </form>
             </div>
           </PublicLayout>
@@ -203,7 +228,10 @@ export default function Home() {
             <div className='feedback__content'>
               <div className='feedback__form'>
                 <h2>Мы на связи</h2>
-                <form onSubmit={feedbackSubmit}>
+                <form onSubmit={(e) => {             
+                  e.preventDefault()
+                  feedbackMutation.mutate(feedbackForm)
+                }}>
                   <input 
                     type='text'
                     name='name'
@@ -244,7 +272,12 @@ export default function Home() {
                     с Политикой обработки персональных данных и даю согласие на обработку  
                     всех моих персональных данных указанных в форме
                   </Link>
-                  <button type='submit'>Отправить</button>
+                  <button 
+                    type='submit'
+                    disabled={feedbackMutation.isPending}    
+                  >
+                    Отправить
+                  </button>
                 </form>
               </div>
               <img src="/feedback.jpg" alt="feedback" />

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useQuery } from "@tanstack/react-query"
 import Header from '../../components/Header'
 import PublicLayout from '../../components/PublicLayout'
 import Footer from '../../components/Footer'
@@ -7,18 +7,27 @@ import * as Api from '../../api/index'
 import '../../styles/news.css'
 
 export default function News() {
-  const [news, setNews] = useState([])
+  const {
+    data: news = [],
+    isLoading, 
+    error, 
+    isError   
+  } = useQuery({
+    queryKey: ["news"],
+    queryFn: Api.news.get,
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 20    
+  })
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const data = await Api.news.get()
-        setNews(data)
-      } catch(e) {
-        console.error('ошибка загрузки:', (e.message))
-      }
-    })()
-  }, [])
+  const renderContent = () => {
+    if (isLoading) return <div className="content-none">Загрузка новостей...</div>
+    if (isError) return <div className="content-none">Ошибка: {error.message}</div>
+    if (news && news.length === 0) return <div className="content-none">Пусто...</div>
+    
+    return news?.map(el => (
+      <Card key={el.id_news} id={el.id_news} data={el} type='news'/>
+    ))
+  }
 
   return (
     <div>
@@ -27,14 +36,7 @@ export default function News() {
         <PublicLayout>
           <h2>Новости</h2>
           <div className='news__content'>
-            {news.length === 0 ? (
-              <div className="content-none">
-                <p>Пусто...</p>
-              </div>
-            ) :
-            news.map(el => (
-              <Card key={el.id_news} id={el.id_news} data={el} type='news'/>
-            ))}
+            {renderContent()}
           </div>
         </PublicLayout>
       </div>
