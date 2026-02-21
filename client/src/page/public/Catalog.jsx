@@ -8,7 +8,7 @@ import '../../styles/catalog.css'
 
 export default function Catalog() {
   const { 
-    data: catalog, 
+    data: catalog = [], 
     isLoading, 
     error, 
     isError 
@@ -20,21 +20,9 @@ export default function Catalog() {
   })
 
   const renderContent = () => {
-     if (isLoading) return (
-      <div className="content-none">
-        <p>Загрузка каталога...</p>
-      </div>
-    )
-    if (isError) return (
-      <div className="content-none">
-        <p>Ошибка: {error.message}</p>
-      </div>
-    )
-    if (catalog?.length === 0) return (
-      <div className="content-none">
-        <p>Пусто...</p>
-      </div>
-    )
+    if (isLoading) return <div className="content-none">Загрузка каталога...</div>
+    if (isError) return <div className="content-none">Ошибка: {error.message}</div>
+    if (catalog && catalog.length === 0) return <div className="content-none">Пусто...</div>
     
     return catalog?.map(el => (
       <Link 

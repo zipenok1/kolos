@@ -7,13 +7,7 @@ import UserStore from './store/UserStore'
 import App from './App.jsx'
 import './index.css'
 
-const queryClient = new QueryClient({
-  // defaultOptions: {
-  //   queries: {
-  //     staleTime: 1000 * 60 * 5
-  //   }
-  // }
-})
+const queryClient = new QueryClient()
 
 export const Context = createContext(null)
 
