@@ -73,7 +73,7 @@
     color: rgb(0, 0, 0);
 }
 
-@media(max-width: 837px){
+@media(max-width: 848px){
     .header__content{
         display: none;
     }

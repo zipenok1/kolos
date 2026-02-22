@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useSimpleForm } from '../../hooks/useSimpleForm'
-import { createFormData } from '../../utils/formHelpers'
 import Header from '../../components/Header'
 import Slider from '../../components/Slider'
 import PublicLayout from '../../components/PublicLayout'
@@ -23,7 +22,7 @@ export default function Home() {
   })
 
   const newsletterMutation = useMutation({
-    mutationFn: (data) => Api.newsletter.post(createFormData(data)),
+    mutationFn: (data) => Api.newsletter.post(data),
     onSuccess: () => {
       resetNewsletterForm()
       setToast({
@@ -40,7 +39,7 @@ export default function Home() {
   })
 
   const feedbackMutation = useMutation({
-    mutationFn: (data) => Api.feedback.post(createFormData(data)),
+    mutationFn: (data) => Api.feedback.post(data),
     onSuccess: () => {
       resetFeedbackForm()
       setToast({
