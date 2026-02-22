@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { useMutation } from "@tanstack/react-query"
 import { Link } from 'react-router-dom'
 import { useSimpleForm } from "../hooks/useSimpleForm"
-import { createFormData } from "../utils/formHelpers"
 import PublicLayout from "./PublicLayout"
 import Modal from './Modal'
 import * as Api from '../api/index'
@@ -14,7 +13,7 @@ export default function Header() {
   const [isChecked, setIsChecked] = useState(false)
   
   const submitMutation = useMutation({
-    mutationFn: (data) => Api.feedback.post(createFormData(data)),
+    mutationFn: (data) => Api.feedback.post(data),
     onSuccess: () => {
       setIsModalOpen(false)
       resetForm()
