@@ -2,10 +2,12 @@ import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import {observer} from 'mobx-react-lite'
 import { Context } from "../../main"
+import Toast from "../../components/Toast"
 import * as Api from '../../api' 
 import '../../styles/authorization.css'
 
 const Authorization = observer(() => {
+  const [toast, setToast] = useState(null)
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
   const {user} = useContext(Context)
@@ -20,18 +22,29 @@ const Authorization = observer(() => {
       user.setIsAuth(true)
       navigate('/admin')
     } catch (e) {
-      console.log('ошибка: ' + (e.message))
+      console.log('ошибка: ' + e.response?.data?.message)
+      setToast({
+        message: 'Ошибка: ' + e.response?.data?.message,
+        type: 'error'
+      })
     }
   }
 
   return (
     <div className="authorization">
+        {toast && (
+          <Toast 
+            message={toast.message}
+            type={toast.type}
+            onClose={() => setToast(null)}
+          />
+        )}
         <form onSubmit={submit}>
           <h3>Авторизация</h3>
             <input 
               type="text"
               name="name"
-              placeholder="Введите имя"
+              placeholder="Введите логин"
               value={name}
               autoComplete="off"
               onChange={(e)=>setName(e.target.value)}
