@@ -1,5 +1,5 @@
 const { Product, Catalog } = require('../models/index')
-const FileService = require('../services/fileService')
+const fileUpload = require('../utils/fileUpload')
 
 class ProductController {
     async get(req, res){
@@ -38,9 +38,9 @@ class ProductController {
             if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
 
             const {name, description, id_catalog} = req.body
-            const img = FileService.getFile(req)
+            const img = fileUpload.getFile(req)
 
-            const fileName = await FileService.saveFile(img)
+            const fileName = await fileUpload.saveFile(img)
             
             const product = await Product.create({
                 name, 
@@ -63,7 +63,7 @@ class ProductController {
                 
             const {id} = req.params
             const {name, description, id_catalog} = req.body
-            const img = FileService.getFile(req)
+            const img = fileUpload.getFile(req)
 
             if(!id) return res.status(400).json('не существует')
 
@@ -72,7 +72,7 @@ class ProductController {
 
             let fileName = product.img
             if (img) {
-                fileName = await FileService.saveFile(img)
+                fileName = await fileUpload.saveFile(img)
             }
 
             await product.update({

@@ -1,8 +1,12 @@
 const uuid = require('uuid')
 const path = require('path')
-const fileFormat = require('../utils/fileFormat')
+const fileFormat = require('./fileFormat')
 
-class FileService {
+class FileUpload {
+    static getFile(req) {
+        return req.files?.img || null
+    }
+
     static async saveFile(img) {
         if (!img) return null
         
@@ -18,10 +22,6 @@ class FileService {
             throw new Error(`ошибка загрузки файла: ${e.message}`)
         }
     }
-    
-    static getFile(req) {
-        return req.files?.img || null
-    }
 }
 
-module.exports = FileService
+module.exports = FileUpload

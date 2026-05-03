@@ -1,5 +1,5 @@
 const { News } = require('../models/index')
-const FileService = require('../services/fileService')
+const fileUpload = require('../utils/fileUpload')
 
 class NewsController {
     async get(req, res){
@@ -34,9 +34,9 @@ class NewsController {
             if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
 
             const {name, description, date} = req.body
-            const img = FileService.getFile(req)
+            const img = fileUpload.getFile(req)
 
-            const fileName = await FileService.saveFile(img)
+            const fileName = await fileUpload.saveFile(img)
             
             const news = await News.create({
                 name, 
@@ -61,14 +61,14 @@ class NewsController {
             if(!id) return res.status(400).json('не существует')
                 
             const {name, description, date} = req.body
-            const img = FileService.getFile(req)
+            const img = fileUpload.getFile(req)
 
             const news = await News.findOne({where: { id_news: id }})
             if(!news) return res.status(400).json('не существует')
 
             let fileName = news.img
             if (img) {
-                fileName = await FileService.saveFile(img)
+                fileName = await fileUpload.saveFile(img)
             }
 
             await news.update({

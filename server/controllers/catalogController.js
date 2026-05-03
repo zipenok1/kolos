@@ -1,86 +1,60 @@
-const { Catalog } = require('../models/index')
-const FileService = require('../services/fileService')
+const CatalogService = require('../services/catalogService')
+const fileUpload = require('../utils/fileUpload')
 
 class CatalogController {
     async get(req, res){
         try{
-            const catalog = await Catalog.findAll() 
+            const catalog = await CatalogService.get()
             return res.status(200).json(catalog)
         } catch(e){
-            return res.status(500).json({ 
-                message: `ошибка получения ${e}` 
-            })
+           return res.status(500).json({ message: e.message })
         }
     }
 
     async post(req, res){
         try{
-            if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
+            if(!req.user) return res.status(401).json({ message: 'требуется авторизация' })
 
-            const {name} = req.body
-            const img = FileService.getFile(req)
+            const img = fileUpload.getFile(req)
 
-            const fileName = await FileService.saveFile(img)
-            
-            const catalog = await Catalog.create({
-                name, 
-                img: fileName
-            })
-
-            return res.json(catalog)
+            const catalog = await CatalogService.post(req.body, img)
+            return res.status(201).json(catalog)
         } catch(e){
-            return res.status(500).json({ 
-                message: `ошибка добавления ${e}`
-            })
+           return res.status(500).json({ message: e.message })
         }
     }
 
-    async put(req, res){
-        try{
-            if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
-                
+    async update(req, res) {
+        try {
+            if (!req.user) return res.status(401).json({ message: 'требуется авторизация' })
+
             const {id} = req.params
-            const {name} = req.body
-            const img = FileService.getFile(req)
-
-            if(!id) return res.status(400).json('не существует')
-
-            const catalog = await Catalog.findOne({where: { id_catalog: id }})
-            if(!catalog) return res.status(400).json('не существует')
+            const img = fileUpload.getFile(req)
             
-            let fileName = catalog.img
-            if (img) {
-                fileName = await FileService.saveFile(img)
+            if (!id) return res.status(400).json({ message: 'id не указан' })
+            
+            const catalog = await CatalogService.update(id, req.body, img)
+            return res.status(200).json(catalog)
+        } catch(e) {
+            if (e.message.includes('не существует')) {
+                return res.status(404).json({ message: e.message })
             }
-
-            await catalog.update({
-                name: name,
-                img: fileName
-            })
-
-            return res.status(200).json({ message: 'записть ' + id + ' обновлена'})
-        } catch(e){
-            return res.status(500).json({ 
-                message: `ошибка обновления ${e}`
-            })
+            return res.status(500).json({ message: e.message })
         }
     }
 
     async delete(req, res){
         try{
-            if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
+            if(!req.user) return res.status(401).json({ message: 'требуется авторизация' })
             const {id} = req.params 
 
-            const catalog = await Catalog.findOne({ where: { id_catalog: id } })
-            if(!catalog) return res.status(400).json('такого элемента не существует')
-
-            await Catalog.destroy({ where:{ id_catalog: id } })
-
-            return res.json({ message: 'записть ' + id + ' удалена'})
+            const catalog = await CatalogService.delete(id)
+            return res.status(200).json({ message: catalog.message, id: catalog.id })
         } catch(e){
-            return res.status(500).json({ 
-                message: `ошибка удалена ${e}`
-            })
+            if (e.message.includes('не существует')) {
+                return res.status(404).json({ message: e.message })
+            }
+            return res.status(500).json({ message: e.message })
         }
     }
 }
