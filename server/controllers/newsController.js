@@ -1,31 +1,25 @@
-const { News } = require('../models/index')
+const newsService = require('../services/newsService')
 const fileUpload = require('../utils/fileUpload')
 
 class NewsController {
     async get(req, res){
         try{
-            const news = await News.findAll() 
-            return  res.status(200).json(news)
+            const news = await newsService.get() 
+            return res.status(200).json(news)
         } catch(e){
-            return res.status(500).json({ 
-                message: `ошибка получения ${e}` 
-            })
+           return res.status(500).json({ message: e.message })
         }
     }
 
     async getById(req, res){
         try{
             const {id} = req.params
-            if(!id) return res.status(400).json('такого элемента не существует')
                 
-            const news = await News.findOne({where: { id_news: id }})
-            if(!news) return res.status(400).json('не существует')
+            const news = await newsService.getById(id)
             
             return res.status(200).json(news)
         } catch(e){
-            return res.status(500).json({ 
-                message: `ошибка получения ${e}` 
-            })
+           return res.status(500).json({ message: e.message })
         }
     }    
 
@@ -33,74 +27,44 @@ class NewsController {
         try{
             if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
 
-            const {name, description, date} = req.body
             const img = fileUpload.getFile(req)
-
-            const fileName = await fileUpload.saveFile(img)
-            
-            const news = await News.create({
-                name, 
-                description,
-                date,
-                img: fileName
-            })
-
-            return res.json(news)
+            const news = await newsService.post(req.body, img)
+            return res.status(201).json(news)
         } catch(e){
-            return res.status(500).json({ 
-                message: `ошибка добавления ${e}`
-            })
+           return res.status(500).json({ message: e.message })
         }
     }
 
-    async put(req, res){
+    async update(req, res){
         try{
             if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
-                
             const {id} = req.params
-            if(!id) return res.status(400).json('не существует')
                 
             const {name, description, date} = req.body
             const img = fileUpload.getFile(req)
 
-            const news = await News.findOne({where: { id_news: id }})
-            if(!news) return res.status(400).json('не существует')
-
-            let fileName = news.img
-            if (img) {
-                fileName = await fileUpload.saveFile(img)
-            }
-
-            await news.update({
-                name: name,
-                description: description,
-                date: date,
-                img: fileName
-            })
-
-            return res.status(200).json({ message: 'записть ' + id + ' обновлена'})
+            const news = await newsService.update(id, req.body, img)
+            return res.status(200).json(news)
         } catch(e){
-            return res.status(500).json({ 
-                message: `ошибка обновления ${e}`
-            })
+            if (e.message.includes('не существует')) {
+                return res.status(404).json({ message: e.message })
+            }
+            return res.status(500).json({ message: e.message })
         }
     }
 
     async delete(req, res){
         try{
+            if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
             const {id} = req.params
-            if(!id) return res.status(400).json('такого элемента не существует')
 
-            const news = await News.findOne({ where: { id_news: id } });
-            if (!news) return res.status(400).json('такого элемента не существует')
-
-            await News.destroy({ where:{ id_news: id } })
-
-            return res.json({ message: 'записть ' + id + ' удалена'})
+            const news = await newsService.delete(id)
+            return res.status(200).json({ message: news.message, id: news.id })
         } catch(e) {
-            return res.status(500).json({ 
-                message: `ошибка удаления ${e}`
-            })
+            if (e.message.includes('не существует')) {
+                return res.status(404).json({ message: e.message })
+            }
+            return res.status(500).json({ message: e.message })
         }
     }
 }

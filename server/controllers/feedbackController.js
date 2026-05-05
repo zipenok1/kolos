@@ -1,48 +1,38 @@
-const { Feedback } = require('../models/index')
+const feedbackService = require("../services/feedbackService")
 
 class FeedbackController {
     async get(req, res){
         try{
-            if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
+            if(!req.user) return res.status(401).json({ message: 'требуется авторизация' })
 
-            const feedback = await Feedback.findAll() 
+            const feedback = await feedbackService.get() 
             return  res.status(200).json(feedback)
         } catch(e){
-            return res.status(500).json({ 
-                message: `ошибка получения ${e}` 
-            })
+           return res.status(500).json({ message: e.message })
         }
     }
 
     async post(req, res){
         try{
-            const {name, phone, email, message} = req.body
-            const feedback = await Feedback.create({name, phone, email, message})
-
-            return res.json(feedback)
+            const feedback = await feedbackService.create(req.body)
+            return res.status(201).json(feedback)
         } catch(e){
-            return res.status(500).json({ 
-                message: `ошибка добавления ${e}`
-            })
+           return res.status(500).json({ message: e.message })
         }
     }
 
     async delete(req, res){
         try{
+            if(!req.user) return res.status(401).json({ message: 'требуется авторизация' })
             const {id} = req.params
-            if(!id) return res.status(400).json('такого элемента не существует')
           
-
-            const feedback = await Feedback.findOne({ where: { id_feedback: id } });
-            if (!feedback) return res.status(400).json('такого элемента не существует')
-
-            await Feedback.destroy({ where:{ id_feedback: id } })
-
-            return res.json({ message: 'записть ' + id + ' удалена'})
+            const feedback = await feedbackService.deleta(id);
+            return res.status(200).json({ message: feedback.message, id: feedback.id })
         } catch(e) {
-            return res.status(500).json({ 
-                message: `ошибка удаления ${e}`
-            })
+            if (e.message.includes('не существует')) {
+                return res.status(404).json({ message: e.message })
+            }
+            return res.status(500).json({ message: e.message })
         }
     }
 }

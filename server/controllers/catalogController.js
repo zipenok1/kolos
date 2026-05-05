@@ -16,7 +16,6 @@ class CatalogController {
             if(!req.user) return res.status(401).json({ message: 'требуется авторизация' })
 
             const img = fileUpload.getFile(req)
-
             const catalog = await CatalogService.post(req.body, img)
             return res.status(201).json(catalog)
         } catch(e){
@@ -27,11 +26,9 @@ class CatalogController {
     async update(req, res) {
         try {
             if (!req.user) return res.status(401).json({ message: 'требуется авторизация' })
-
             const {id} = req.params
+        
             const img = fileUpload.getFile(req)
-            
-            if (!id) return res.status(400).json({ message: 'id не указан' })
             
             const catalog = await CatalogService.update(id, req.body, img)
             return res.status(200).json(catalog)
