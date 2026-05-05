@@ -1,110 +1,70 @@
-const { Product, Catalog } = require('../models/index')
+const productService = require('../services/productService')
 const fileUpload = require('../utils/fileUpload')
 
 class ProductController {
     async get(req, res){
         try{
-            const product = await Product.findAll() 
+            const product = await productService.get()
             return  res.status(200).json(product)
         } catch(e){
-            return res.status(500).json({ 
-                message: `ошибка получения ${e}` 
-            })
+           return res.status(500).json({ message: e.message })
         }
     }
 
     async getByCatalog(req, res){
-      try {
-        const {id} = req.params;
-        if (!id) return res.status(400).json('id не указан')
-        
-        const product = await Product.findAll({
-            where: { id_catalog: id },
-            include: [{ model: Catalog }] 
-        })
-        
-        if (!product) return res.status(404).json('не найден')
-        
-        return res.status(200).json(product)
-    } catch(e) {
-        return res.status(500).json({ 
-            message: `ошибка получения: ${e.message}` 
-        });
-    }
+        try {
+            const {id} = req.params;
+            
+            const product = await productService.getByCatalog(id)
+            return res.status(200).json(product)
+        } catch(e) {
+            if (e.message.includes('не существует')) {
+                return res.status(404).json({ message: e.message })
+            }
+            return res.status(500).json({ message: e.message })
+        }
     }
 
     async post(req, res){
         try{
             if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
 
-            const {name, description, id_catalog} = req.body
-            const img = fileUpload.getFile(req)
-
-            const fileName = await fileUpload.saveFile(img)
-            
-            const product = await Product.create({
-                name, 
-                description,
-                id_catalog,
-                img: fileName
-            })
-
-            return res.json(product)
+            const img = fileUpload.getFile(req)            
+            const product = await productService.post(req.body, img)
+            return res.status(201).json(product)
         } catch(e){
-            return res.status(500).json({ 
-                message: `ошибка добавления ${e}`
-            })
+           return res.status(500).json({ message: e.message })
         }
     }
 
-    async put(req, res){
+    async update(req, res){
         try{
             if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
-                
             const {id} = req.params
-            const {name, description, id_catalog} = req.body
+            
             const img = fileUpload.getFile(req)
-
-            if(!id) return res.status(400).json('не существует')
-
-            const product = await Product.findOne({where: { id_product: id }})
-            if(!product) return res.status(400).json('не существует')
-
-            let fileName = product.img
-            if (img) {
-                fileName = await fileUpload.saveFile(img)
-            }
-
-            await product.update({
-                name: name,
-                description: description,
-                id_catalog: id_catalog,
-                img: fileName
-            })
-
-            return res.status(200).json({ message: 'записть ' + id + ' обновлена'})
+            const product = await productService.update(id, req.body, img)
+            return res.status(200).json(product)
         } catch(e){
-            return res.status(500).json({ 
-                message: `ошибка обновления ${e}`
-            })
+            if (e.message.includes('не существует')) {
+                return res.status(404).json({ message: e.message })
+            }
+            return res.status(500).json({ message: e.message })
         }
     }
 
     async delete(req, res){
         try{
+            if(!req.user) return res.status(401).json({ message: 'требуется авторизация' })
             const {id} = req.params
-            if(!id) return res.status(400).json('такого элемента не существует')
 
-            const product = await Product.findOne({ where: { id_product: id } });
-            if (!product) return res.status(400).json('такого элемента не существует')
-
-            await Product.destroy({ where:{ id_product: id } })
-
-            return res.json({ message: 'записть ' + id + ' удалена'})
+            const product = await productService.delete(id)
+            return res.status(200).json({ message: product.message, id: product.id })
         } catch(e) {
-            return res.status(500).json({ 
-                message: `ошибка удаления ${e}`
-            })
+            if (e.message.includes('не существует')) {
+                return res.status(404).json({ message: e.message })
+            }
+            return res.status(500).json({ message: e.message })
         }
     }
 }

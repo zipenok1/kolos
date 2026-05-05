@@ -16,7 +16,6 @@ class NewsController {
             const {id} = req.params
                 
             const news = await newsService.getById(id)
-            
             return res.status(200).json(news)
         } catch(e){
            return res.status(500).json({ message: e.message })
@@ -39,10 +38,8 @@ class NewsController {
         try{
             if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
             const {id} = req.params
-                
-            const {name, description, date} = req.body
-            const img = fileUpload.getFile(req)
 
+            const img = fileUpload.getFile(req)
             const news = await newsService.update(id, req.body, img)
             return res.status(200).json(news)
         } catch(e){

@@ -1,47 +1,38 @@
-const { Newsletter } = require('../models/index')
+const newsletterService = require('../services/newsletterService')
 
 class NewsletterController {
     async get(req, res){
         try{
-            if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
+            if(!req.user) return res.status(401).json({ message: 'требуется авторизация' })
 
-            const newsletter = await Newsletter.findAll() 
+            const newsletter = await newsletterService.get()
             return  res.status(200).json(newsletter)
         } catch(e){
-            return res.status(500).json({ 
-                message: `ошибка получения ${e}` 
-            })
+           return res.status(500).json({ message: e.message })
         }
     }
 
     async post(req, res){
         try{
-            const {email} = req.body
-            const newsletter = await Newsletter.create({email})
-
-            return res.json(newsletter)
+            const newsletter = await newsletterService.post(req.body)
+            return res.status(201).json(newsletter)
         } catch(e){
-            return res.status(500).json({ 
-                message: `ошибка добавления ${e}`
-            })
+           return res.status(500).json({ message: e.message })
         }
     }
 
     async delete(req, res){
         try{
+            if(!req.user) return res.status(401).json({ message: 'требуется авторизация' })
             const {id} = req.params
-            if(!id) return res.status(400).json('такого элемента не существует')
 
-            const newsletter = await Newsletter.findOne({ where: { id_newsletter: id } });
-            if (!newsletter) return res.status(400).json('такого элемента не существует')
-
-            await Newsletter.destroy({ where:{ id_newsletter: id } })
-
-            return res.json({ message: 'записть ' + id + ' удалена'})
+            const newsletter = await newsletterService.delete(id)
+            return res.status(200).json({ message: newsletter.message, id: newsletter.id })
         } catch(e) {
-            return res.status(500).json({ 
-                message: `ошибка удаления ${e}`
-            })
+            if (e.message.includes('не существует')) {
+                return res.status(404).json({ message: e.message })
+            }
+            return res.status(500).json({ message: e.message })
         }
     }
 }
