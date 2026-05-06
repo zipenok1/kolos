@@ -3,7 +3,7 @@ const BaseService = require('./baseService')
 
 class NewsletterService extends BaseService{
     constructor(){
-        super(Newsletter, 'id_newsletter', {isImg: true})
+        super(Newsletter, 'id_newsletter', {isImg: false})
     }
 }
 
