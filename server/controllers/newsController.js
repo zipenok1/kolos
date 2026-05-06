@@ -24,7 +24,7 @@ class NewsController {
 
     async post(req, res){
         try{
-            if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
+            if(!req.user) return res.status(401).json({ message: 'требуется авторизация' })
 
             const img = fileUpload.getFile(req)
             const news = await newsService.post(req.body, img)
@@ -36,7 +36,7 @@ class NewsController {
 
     async update(req, res){
         try{
-            if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
+            if(!req.user) return res.status(401).json({ message: 'требуется авторизация' })
             const {id} = req.params
 
             const img = fileUpload.getFile(req)
@@ -52,7 +52,7 @@ class NewsController {
 
     async delete(req, res){
         try{
-            if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
+            if(!req.user) return res.status(401).json({ message: 'требуется авторизация' })
             const {id} = req.params
 
             const news = await newsService.delete(id)

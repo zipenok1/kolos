@@ -27,7 +27,7 @@ class ProductController {
 
     async post(req, res){
         try{
-            if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
+            if(!req.user) return res.status(401).json({ message: 'требуется авторизация' })
 
             const img = fileUpload.getFile(req)            
             const product = await productService.post(req.body, img)
@@ -39,7 +39,7 @@ class ProductController {
 
     async update(req, res){
         try{
-            if(!req.user) return res.status(401).json({ message: 'требуеться авторизация' })
+            if(!req.user) return res.status(401).json({ message: 'требуется авторизация' })
             const {id} = req.params
             
             const img = fileUpload.getFile(req)
